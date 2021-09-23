@@ -32,10 +32,12 @@
             android:exported="true" />
         <activity
             android:name=".Confirm"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".SignUp"/>
         <activity
             android:name=".SignUp"
-            android:exported="true" />
+            android:exported="true"
+            android:parentActivityName=".SignIn"/>
         <activity
             android:name=".SignIn"
             android:exported="true" />
