@@ -1,0 +1,34 @@
+type User @model {
+  id: ID!
+  username: String!
+  image : String
+  firstname: String!
+  lastname: String!
+  phone : String!
+  email : String!
+  request: [Request] @connection(name: "userRequest")
+}
+
+type Request @model {
+    id: ID!
+    name : String!
+    description : String
+    phone : String
+    services: Services @connection(name: "requestService")
+    user: User @connection(name: "userRequest")
+    location : Location @connection
+}
+
+type Location @model {
+    id: ID!
+    countryName : String!
+    cityName : String!
+    longitude : Float!
+    latitude : Float!
+}
+
+type Services @model {
+    id: ID!
+    name : String!
+    request: [Request] @connection(name: "requestService")
+}
