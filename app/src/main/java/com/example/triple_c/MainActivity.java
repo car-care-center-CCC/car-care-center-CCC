@@ -18,9 +18,10 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
 
         try {
-            // Add these lines to add the AWSApiPlugin plugins
             Amplify.addPlugin(new AWSApiPlugin());
             Amplify.addPlugin(new AWSCognitoAuthPlugin());
             Amplify.addPlugin(new AWSS3StoragePlugin());
@@ -36,7 +37,14 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("AmplifyQuickstart", error.toString())
         );
 
-        setContentView(R.layout.activity_main);
+        Button signoutButton = findViewById(R.id.signoutButton);
+        signoutButton.setOnClickListener( v-> {
+                Amplify.Auth.signOut(
+                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                        error -> Log.e("AuthQuickstart", error.toString())
+                );
+        });
+
         Button addCar = findViewById(R.id.addCarButton);
         Button askForHelp = findViewById(R.id.askForServices);
         Button confirm = findViewById(R.id.confirmPagee);
