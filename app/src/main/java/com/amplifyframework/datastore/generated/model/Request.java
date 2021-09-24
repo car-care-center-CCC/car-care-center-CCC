@@ -25,6 +25,7 @@ public final class Request implements Model {
   public static final QueryField NAME = field("Request", "name");
   public static final QueryField DESCRIPTION = field("Request", "description");
   public static final QueryField PHONE = field("Request", "phone");
+  public static final QueryField IS_TAKEN = field("Request", "isTaken");
   public static final QueryField SERVICES = field("Request", "requestServicesId");
   public static final QueryField USER = field("Request", "requestUserId");
   public static final QueryField LOCATION = field("Request", "requestLocationId");
@@ -32,6 +33,7 @@ public final class Request implements Model {
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="String") String phone;
+  private final @ModelField(targetType="Boolean") Boolean isTaken;
   private final @ModelField(targetType="Services") @BelongsTo(targetName = "requestServicesId", type = Services.class) Services services;
   private final @ModelField(targetType="User") @BelongsTo(targetName = "requestUserId", type = User.class) User user;
   private final @ModelField(targetType="Location") @BelongsTo(targetName = "requestLocationId", type = Location.class) Location location;
@@ -51,6 +53,10 @@ public final class Request implements Model {
   
   public String getPhone() {
       return phone;
+  }
+  
+  public Boolean getIsTaken() {
+      return isTaken;
   }
   
   public Services getServices() {
@@ -73,11 +79,12 @@ public final class Request implements Model {
       return updatedAt;
   }
   
-  private Request(String id, String name, String description, String phone, Services services, User user, Location location) {
+  private Request(String id, String name, String description, String phone, Boolean isTaken, Services services, User user, Location location) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.phone = phone;
+    this.isTaken = isTaken;
     this.services = services;
     this.user = user;
     this.location = location;
@@ -95,6 +102,7 @@ public final class Request implements Model {
               ObjectsCompat.equals(getName(), request.getName()) &&
               ObjectsCompat.equals(getDescription(), request.getDescription()) &&
               ObjectsCompat.equals(getPhone(), request.getPhone()) &&
+              ObjectsCompat.equals(getIsTaken(), request.getIsTaken()) &&
               ObjectsCompat.equals(getServices(), request.getServices()) &&
               ObjectsCompat.equals(getUser(), request.getUser()) &&
               ObjectsCompat.equals(getLocation(), request.getLocation()) &&
@@ -110,6 +118,7 @@ public final class Request implements Model {
       .append(getName())
       .append(getDescription())
       .append(getPhone())
+      .append(getIsTaken())
       .append(getServices())
       .append(getUser())
       .append(getLocation())
@@ -127,6 +136,7 @@ public final class Request implements Model {
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("description=" + String.valueOf(getDescription()) + ", ")
       .append("phone=" + String.valueOf(getPhone()) + ", ")
+      .append("isTaken=" + String.valueOf(getIsTaken()) + ", ")
       .append("services=" + String.valueOf(getServices()) + ", ")
       .append("user=" + String.valueOf(getUser()) + ", ")
       .append("location=" + String.valueOf(getLocation()) + ", ")
@@ -166,6 +176,7 @@ public final class Request implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -175,6 +186,7 @@ public final class Request implements Model {
       name,
       description,
       phone,
+      isTaken,
       services,
       user,
       location);
@@ -189,6 +201,7 @@ public final class Request implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep description(String description);
     BuildStep phone(String phone);
+    BuildStep isTaken(Boolean isTaken);
     BuildStep services(Services services);
     BuildStep user(User user);
     BuildStep location(Location location);
@@ -200,6 +213,7 @@ public final class Request implements Model {
     private String name;
     private String description;
     private String phone;
+    private Boolean isTaken;
     private Services services;
     private User user;
     private Location location;
@@ -212,6 +226,7 @@ public final class Request implements Model {
           name,
           description,
           phone,
+          isTaken,
           services,
           user,
           location);
@@ -233,6 +248,12 @@ public final class Request implements Model {
     @Override
      public BuildStep phone(String phone) {
         this.phone = phone;
+        return this;
+    }
+    
+    @Override
+     public BuildStep isTaken(Boolean isTaken) {
+        this.isTaken = isTaken;
         return this;
     }
     
@@ -266,11 +287,12 @@ public final class Request implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String description, String phone, Services services, User user, Location location) {
+    private CopyOfBuilder(String id, String name, String description, String phone, Boolean isTaken, Services services, User user, Location location) {
       super.id(id);
       super.name(name)
         .description(description)
         .phone(phone)
+        .isTaken(isTaken)
         .services(services)
         .user(user)
         .location(location);
@@ -289,6 +311,11 @@ public final class Request implements Model {
     @Override
      public CopyOfBuilder phone(String phone) {
       return (CopyOfBuilder) super.phone(phone);
+    }
+    
+    @Override
+     public CopyOfBuilder isTaken(Boolean isTaken) {
+      return (CopyOfBuilder) super.isTaken(isTaken);
     }
     
     @Override
