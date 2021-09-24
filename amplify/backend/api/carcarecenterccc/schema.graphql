@@ -7,6 +7,7 @@ type User @model {
   phone : String!
   email : String!
   request: [Request] @connection(name: "userRequest")
+  cars: [Car] @connection(name: "userCar")
 }
 
 type Request @model {
@@ -14,6 +15,7 @@ type Request @model {
     name : String!
     description : String
     phone : String
+    isTaken: Boolean
     services: Services @connection(name: "requestService")
     user: User @connection(name: "userRequest")
     location : Location @connection
@@ -31,4 +33,12 @@ type Services @model {
     id: ID!
     name : String!
     request: [Request] @connection(name: "requestService")
+}
+
+type Car @model {
+    id: ID!
+    type: String!
+    model: String
+    gasoline: String
+    user: User @connection(name: "userCar")
 }

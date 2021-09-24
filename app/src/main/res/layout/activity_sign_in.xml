@@ -35,7 +35,6 @@
         android:id="@+id/signinButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/botton_pg"
         android:text="Sigh In"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/passwordSignin"
@@ -67,5 +66,33 @@
         app:layout_constraintStart_toStartOf="@+id/usernameSignin"
         app:layout_constraintTop_toBottomOf="@+id/usernameSignin"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Don't have an account? "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signinButton"
+        app:layout_constraintVertical_bias="0.171" />
+
+    <TextView
+        android:id="@+id/signUpInSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#1C89BA"
+        android:text="SignUp!"
+        android:textColor="#25ADEA"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/signinButton"
+        app:layout_constraintVertical_bias="0.169" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

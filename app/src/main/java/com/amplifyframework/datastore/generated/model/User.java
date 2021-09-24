@@ -36,6 +36,7 @@ public final class User implements Model {
   private final @ModelField(targetType="String", isRequired = true) String phone;
   private final @ModelField(targetType="String", isRequired = true) String email;
   private final @ModelField(targetType="Request") @HasMany(associatedWith = "user", type = Request.class) List<Request> request = null;
+  private final @ModelField(targetType="Car") @HasMany(associatedWith = "user", type = Car.class) List<Car> cars = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -68,6 +69,10 @@ public final class User implements Model {
   
   public List<Request> getRequest() {
       return request;
+  }
+  
+  public List<Car> getCars() {
+      return cars;
   }
   
   public Temporal.DateTime getCreatedAt() {
