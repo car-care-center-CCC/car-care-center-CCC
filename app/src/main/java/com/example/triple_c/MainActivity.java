@@ -38,11 +38,11 @@ public class MainActivity extends AppCompatActivity {
         );
 
         Button signoutButton = findViewById(R.id.signoutButton);
-        signoutButton.setOnClickListener( v-> {
-                Amplify.Auth.signOut(
-                        () -> Log.i("AuthQuickstart", "Signed out successfully"),
-                        error -> Log.e("AuthQuickstart", error.toString())
-                );
+        signoutButton.setOnClickListener(v -> {
+            Amplify.Auth.signOut(
+                    () -> Log.i("AuthQuickstart", "Signed out successfully"),
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
         });
 
         Button addCar = findViewById(R.id.addCarButton);
@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Button signIn = findViewById(R.id.signIn);
         Button signUp = findViewById(R.id.signUp);
         Button splash = findViewById(R.id.splash);
+        Button Details = findViewById(R.id.Details);
 
         addCar.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, AddCar.class));
@@ -85,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
         });
         splash.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, Splash.class));
+        });
+        Details.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, Details.class));
         });
 
     }
