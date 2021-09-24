@@ -16,6 +16,7 @@ public class Confirm extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         EditText confirmationInput = findViewById(R.id.confirmationInput);
         EditText usernameConfirm = findViewById(R.id.usernameConfirm);
