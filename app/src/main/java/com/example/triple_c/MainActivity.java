@@ -82,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button addCar = findViewById(R.id.addCarButton);
-        Button askForHelp = findViewById(R.id.askForServices);
+//        Button askForHelp = findViewById(R.id.askForServices);
         Button confirm = findViewById(R.id.confirmPagee);
         Button contactUs = findViewById(R.id.contactUs);
         Button details = findViewById(R.id.details);
@@ -96,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
         addCar.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, AddCar.class));
         });
-        askForHelp.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, AskForService.class));
-        });
+//        askForHelp.setOnClickListener(view -> {
+//            startActivity(new Intent(MainActivity.this, AskForService.class));
+//        });
         confirm.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, Confirm.class));
         });

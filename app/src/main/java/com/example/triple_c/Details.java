@@ -37,9 +37,7 @@ public class Details extends AppCompatActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         LatLng amman = new LatLng(32.0279704, 35.8284953);
-        googleMap.addMarker(new MarkerOptions().position(amman).title("Marker in Sydney"));
+        googleMap.addMarker(new MarkerOptions().position(amman).title("Marker in Amman"));
         googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(amman,15));
-        googleMap.animateCamera(CameraUpdateFactory.zoomIn());
-        googleMap.animateCamera(CameraUpdateFactory.zoomTo(15), 2000, null);
     }
 }
