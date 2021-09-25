@@ -1,18 +1,17 @@
 package com.example.triple_c;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -29,14 +28,13 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Car;
-import com.amplifyframework.datastore.generated.model.Location;
+import com.amplifyframework.datastore.generated.model.OurLocation;
 import com.amplifyframework.datastore.generated.model.Request;
 import com.amplifyframework.datastore.generated.model.Service;
 import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 
 import java.io.IOException;
@@ -46,6 +44,7 @@ import java.util.Locale;
 
 public class AskForService extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
     EditText serviceDescription, phoneNumber;
     TextView countryName, cityName, serviceName;
     Button shareLocation, submit;
@@ -54,7 +53,8 @@ public class AskForService extends AppCompatActivity {
     Double longitudeStorage, latitudeStorage;
     User user;
     Service service;
-    Location currentLocation = null;
+    OurLocation currentLocation = null;
+    Car car;
     boolean checked = false;
 
 
@@ -76,7 +76,7 @@ public class AskForService extends AppCompatActivity {
         shareLocationListener();
 
         ////////////////////////////////// get user and service by Id ////////////////////////////////////
-        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(AskForService.this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(AskForService.this);
         String userId = sharedPreferences.getString("userId", "");
         Intent intent = getIntent();
         String serviceId = intent.getExtras().getString("serviceId");
@@ -118,7 +118,16 @@ public class AskForService extends AppCompatActivity {
         super.onStart();
         submit.setOnClickListener(view -> {
             if (checked && !serviceDescription.getText().toString().equals("") && !phoneNumber.getText().toString().equals("")) {
-                saveTheDataInTheCloud();
+                String carId = sharedPreferences.getString("carId", "null");
+                Amplify.API.query(
+                        ModelQuery.get(Car.class, carId),
+                        response -> {
+                            Log.i("Car ================ ", response.getData().getId());
+                            car = response.getData();
+                            saveTheDataInTheCloud();
+                        },
+                        error -> Log.e("MyAmplifyApp", error.toString(), error)
+                );
             } else {
                 handler2();
             }
@@ -129,7 +138,6 @@ public class AskForService extends AppCompatActivity {
     public void shareLocationListener() {
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            System.out.println("Hello");
             showLocation();
         } else
             ActivityCompat.requestPermissions(AskForService.this,
@@ -146,29 +154,31 @@ public class AskForService extends AppCompatActivity {
     }
 
     ////////////////////////////// Function to show the location /////////////////////////////
-    @SuppressLint("MissingPermission")
     private void showLocation() {
-        fusedLocationProviderClient.getLastLocation().addOnCompleteListener(new OnCompleteListener<android.location.Location>() {
-            @Override
-            public void onComplete(@NonNull Task<android.location.Location> task) {
-                android.location.Location location = task.getResult();
-                if (location != null) {
-                    Geocoder geocoder = new Geocoder(AskForService.this, Locale.getDefault());
-                    try {
-                        List<Address> address = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 10);
-                        Address obj = address.get(0);
-                        countryNameStorage = obj.getCountryName();
-                        cityNameStorage = obj.getLocality();
-                        longitudeStorage = location.getLongitude();
-                        latitudeStorage = location.getLatitude();
-                        System.out.println("++++++++++++++++++++++++++++++ " + obj.getLocality() + " ++++++++++++++++++++++++++++++");
-                        Log.i("Location", obj.getCountryName());
-                    } catch (IOException e) {
-                        e.printStackTrace();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation()
+                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                    @Override
+                    public void onSuccess(Location location) {
+                        if (location != null) {
+                            Geocoder geocoder = new Geocoder(AskForService.this, Locale.getDefault());
+                            try {
+                                List<Address> address = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 10);
+                                Address obj = address.get(0);
+                                countryNameStorage = obj.getCountryName();
+                                cityNameStorage = obj.getLocality();
+                                longitudeStorage = location.getLongitude();
+                                latitudeStorage = location.getLatitude();
+                                System.out.println("++++++++++++++++++++++++++++++ " + obj.getLocality() + " ++++++++++++++++++++++++++++++");
+                                Log.i("Location", obj.getCountryName());
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
     }
 
     ////////////////////////////////// Function to save the service data ////////////////////////////////////
@@ -180,7 +190,8 @@ public class AskForService extends AppCompatActivity {
                 .isTaken(false)
                 .service(service)
                 .user(user)
-                .location(currentLocation)
+                .ourLocation(currentLocation)
+                .car(car)
                 .build();
 
         Amplify.API.mutate(
@@ -194,11 +205,11 @@ public class AskForService extends AppCompatActivity {
     //////////////////////////////////// Function to save the location data ////////////////////////////////////
     private void saveLocationData(String country, String city,
                                   Double longitudeNumber, Double latitudeNumber) {
-        Location location = Location.builder()
-                .countryName(country)
+        OurLocation location = OurLocation.builder()
+                .countryName(country != null ? country : "")
                 .cityName(city != null ? city : "")
-                .longitude(longitudeNumber)
-                .latitude(latitudeNumber)
+                .longitude(longitudeNumber != null ? longitudeNumber : 0.0)
+                .latitude(latitudeNumber != null ? longitudeNumber : 0.0)
                 .build();
         currentLocation = location;
 
@@ -214,7 +225,6 @@ public class AskForService extends AppCompatActivity {
     public boolean onCheckboxClicked(View view) {
         checked = ((CheckBox) view).isChecked();
         if (checked) {
-            Toast.makeText(this, "Submitted", Toast.LENGTH_SHORT).show();
             countryName.setText(countryNameStorage);
             cityName.setText(cityNameStorage);
         } else {
