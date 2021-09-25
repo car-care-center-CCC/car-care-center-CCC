@@ -9,8 +9,10 @@ import android.widget.Button;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Service;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,6 +29,19 @@ public class MainActivity extends AppCompatActivity {
             Amplify.addPlugin(new AWSS3StoragePlugin());
 
             Amplify.configure(getApplicationContext());
+
+/////////////// Adding Services as a hard coded /////////////////
+
+//            Service service = Service.builder()
+//                    .name("Fuel Supply")
+//                    .build();
+//
+//            Amplify.API.mutate(
+//                    ModelMutation.create(service),
+//                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
+//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
+//            );
+
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
             Log.e("MyAmplifyApp", "Could not initialize Amplify", error);

@@ -26,7 +26,7 @@ public final class Request implements Model {
   public static final QueryField DESCRIPTION = field("Request", "description");
   public static final QueryField PHONE = field("Request", "phone");
   public static final QueryField IS_TAKEN = field("Request", "isTaken");
-  public static final QueryField SERVICES = field("Request", "requestServicesId");
+  public static final QueryField SERVICE = field("Request", "requestServiceId");
   public static final QueryField USER = field("Request", "requestUserId");
   public static final QueryField LOCATION = field("Request", "requestLocationId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
@@ -34,7 +34,7 @@ public final class Request implements Model {
   private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="String") String phone;
   private final @ModelField(targetType="Boolean") Boolean isTaken;
-  private final @ModelField(targetType="Services") @BelongsTo(targetName = "requestServicesId", type = Services.class) Services services;
+  private final @ModelField(targetType="Service") @BelongsTo(targetName = "requestServiceId", type = Service.class) Service service;
   private final @ModelField(targetType="User") @BelongsTo(targetName = "requestUserId", type = User.class) User user;
   private final @ModelField(targetType="Location") @BelongsTo(targetName = "requestLocationId", type = Location.class) Location location;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
@@ -59,8 +59,8 @@ public final class Request implements Model {
       return isTaken;
   }
   
-  public Services getServices() {
-      return services;
+  public Service getService() {
+      return service;
   }
   
   public User getUser() {
@@ -79,13 +79,13 @@ public final class Request implements Model {
       return updatedAt;
   }
   
-  private Request(String id, String name, String description, String phone, Boolean isTaken, Services services, User user, Location location) {
+  private Request(String id, String name, String description, String phone, Boolean isTaken, Service service, User user, Location location) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.phone = phone;
     this.isTaken = isTaken;
-    this.services = services;
+    this.service = service;
     this.user = user;
     this.location = location;
   }
@@ -103,7 +103,7 @@ public final class Request implements Model {
               ObjectsCompat.equals(getDescription(), request.getDescription()) &&
               ObjectsCompat.equals(getPhone(), request.getPhone()) &&
               ObjectsCompat.equals(getIsTaken(), request.getIsTaken()) &&
-              ObjectsCompat.equals(getServices(), request.getServices()) &&
+              ObjectsCompat.equals(getService(), request.getService()) &&
               ObjectsCompat.equals(getUser(), request.getUser()) &&
               ObjectsCompat.equals(getLocation(), request.getLocation()) &&
               ObjectsCompat.equals(getCreatedAt(), request.getCreatedAt()) &&
@@ -119,7 +119,7 @@ public final class Request implements Model {
       .append(getDescription())
       .append(getPhone())
       .append(getIsTaken())
-      .append(getServices())
+      .append(getService())
       .append(getUser())
       .append(getLocation())
       .append(getCreatedAt())
@@ -137,7 +137,7 @@ public final class Request implements Model {
       .append("description=" + String.valueOf(getDescription()) + ", ")
       .append("phone=" + String.valueOf(getPhone()) + ", ")
       .append("isTaken=" + String.valueOf(getIsTaken()) + ", ")
-      .append("services=" + String.valueOf(getServices()) + ", ")
+      .append("service=" + String.valueOf(getService()) + ", ")
       .append("user=" + String.valueOf(getUser()) + ", ")
       .append("location=" + String.valueOf(getLocation()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
@@ -187,7 +187,7 @@ public final class Request implements Model {
       description,
       phone,
       isTaken,
-      services,
+      service,
       user,
       location);
   }
@@ -202,7 +202,7 @@ public final class Request implements Model {
     BuildStep description(String description);
     BuildStep phone(String phone);
     BuildStep isTaken(Boolean isTaken);
-    BuildStep services(Services services);
+    BuildStep service(Service service);
     BuildStep user(User user);
     BuildStep location(Location location);
   }
@@ -214,7 +214,7 @@ public final class Request implements Model {
     private String description;
     private String phone;
     private Boolean isTaken;
-    private Services services;
+    private Service service;
     private User user;
     private Location location;
     @Override
@@ -227,7 +227,7 @@ public final class Request implements Model {
           description,
           phone,
           isTaken,
-          services,
+          service,
           user,
           location);
     }
@@ -258,8 +258,8 @@ public final class Request implements Model {
     }
     
     @Override
-     public BuildStep services(Services services) {
-        this.services = services;
+     public BuildStep service(Service service) {
+        this.service = service;
         return this;
     }
     
@@ -287,13 +287,13 @@ public final class Request implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String description, String phone, Boolean isTaken, Services services, User user, Location location) {
+    private CopyOfBuilder(String id, String name, String description, String phone, Boolean isTaken, Service service, User user, Location location) {
       super.id(id);
       super.name(name)
         .description(description)
         .phone(phone)
         .isTaken(isTaken)
-        .services(services)
+        .service(service)
         .user(user)
         .location(location);
     }
@@ -319,8 +319,8 @@ public final class Request implements Model {
     }
     
     @Override
-     public CopyOfBuilder services(Services services) {
-      return (CopyOfBuilder) super.services(services);
+     public CopyOfBuilder service(Service service) {
+      return (CopyOfBuilder) super.service(service);
     }
     
     @Override
