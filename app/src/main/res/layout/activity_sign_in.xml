@@ -6,11 +6,93 @@
     android:layout_height="match_parent"
     tools:context=".SignIn">
 
+    <EditText
+        android:id="@+id/usernameSignin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="25dp"
+        android:background="@drawable/input_pg"
+        android:backgroundTint="#EDEDED"
+        android:drawableLeft="@drawable/ic_baseline_person_24"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.211" />
+
+    <Button
+        android:id="@+id/signinButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Sigh In"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/passwordSignin"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/passwordSignin"
+        app:layout_constraintTop_toBottomOf="@+id/passwordSignin"
+        app:layout_constraintVertical_bias="0.11" />
+
+    <EditText
+        android:id="@+id/passwordSignin"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/input_pg"
+        android:backgroundTint="#EDEDED"
+        android:drawableLeft="@android:drawable/ic_secure"
+        android:drawablePadding="5dp"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingLeft="20dp"
+        android:paddingTop="10dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/usernameSignin"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="@+id/usernameSignin"
+        app:layout_constraintTop_toBottomOf="@+id/usernameSignin"
+        app:layout_constraintVertical_bias="0.0" />
+
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SignIn"
-        tools:layout_editor_absoluteX="77dp"
-        tools:layout_editor_absoluteY="23dp" />
+        android:text="Don't have an account? "
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signinButton"
+        app:layout_constraintVertical_bias="0.171" />
+
+    <TextView
+        android:id="@+id/signUpInSignIn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:shadowColor="#1C89BA"
+        android:text="SignUp!"
+        android:textColor="#25ADEA"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/textView4"
+        app:layout_constraintTop_toBottomOf="@+id/signinButton"
+        app:layout_constraintVertical_bias="0.169" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
