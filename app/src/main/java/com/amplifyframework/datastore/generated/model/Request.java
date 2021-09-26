@@ -25,14 +25,16 @@ public final class Request implements Model {
   public static final QueryField NAME = field("Request", "name");
   public static final QueryField DESCRIPTION = field("Request", "description");
   public static final QueryField PHONE = field("Request", "phone");
-  public static final QueryField SERVICES = field("Request", "requestServicesId");
+  public static final QueryField IS_TAKEN = field("Request", "isTaken");
+  public static final QueryField SERVICE = field("Request", "requestServiceId");
   public static final QueryField USER = field("Request", "requestUserId");
   public static final QueryField LOCATION = field("Request", "requestLocationId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String name;
   private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="String") String phone;
-  private final @ModelField(targetType="Services") @BelongsTo(targetName = "requestServicesId", type = Services.class) Services services;
+  private final @ModelField(targetType="Boolean") Boolean isTaken;
+  private final @ModelField(targetType="Service") @BelongsTo(targetName = "requestServiceId", type = Service.class) Service service;
   private final @ModelField(targetType="User") @BelongsTo(targetName = "requestUserId", type = User.class) User user;
   private final @ModelField(targetType="Location") @BelongsTo(targetName = "requestLocationId", type = Location.class) Location location;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
@@ -53,8 +55,12 @@ public final class Request implements Model {
       return phone;
   }
   
-  public Services getServices() {
-      return services;
+  public Boolean getIsTaken() {
+      return isTaken;
+  }
+  
+  public Service getService() {
+      return service;
   }
   
   public User getUser() {
@@ -73,12 +79,13 @@ public final class Request implements Model {
       return updatedAt;
   }
   
-  private Request(String id, String name, String description, String phone, Services services, User user, Location location) {
+  private Request(String id, String name, String description, String phone, Boolean isTaken, Service service, User user, Location location) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.phone = phone;
-    this.services = services;
+    this.isTaken = isTaken;
+    this.service = service;
     this.user = user;
     this.location = location;
   }
@@ -95,7 +102,8 @@ public final class Request implements Model {
               ObjectsCompat.equals(getName(), request.getName()) &&
               ObjectsCompat.equals(getDescription(), request.getDescription()) &&
               ObjectsCompat.equals(getPhone(), request.getPhone()) &&
-              ObjectsCompat.equals(getServices(), request.getServices()) &&
+              ObjectsCompat.equals(getIsTaken(), request.getIsTaken()) &&
+              ObjectsCompat.equals(getService(), request.getService()) &&
               ObjectsCompat.equals(getUser(), request.getUser()) &&
               ObjectsCompat.equals(getLocation(), request.getLocation()) &&
               ObjectsCompat.equals(getCreatedAt(), request.getCreatedAt()) &&
@@ -110,7 +118,8 @@ public final class Request implements Model {
       .append(getName())
       .append(getDescription())
       .append(getPhone())
-      .append(getServices())
+      .append(getIsTaken())
+      .append(getService())
       .append(getUser())
       .append(getLocation())
       .append(getCreatedAt())
@@ -127,7 +136,8 @@ public final class Request implements Model {
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("description=" + String.valueOf(getDescription()) + ", ")
       .append("phone=" + String.valueOf(getPhone()) + ", ")
-      .append("services=" + String.valueOf(getServices()) + ", ")
+      .append("isTaken=" + String.valueOf(getIsTaken()) + ", ")
+      .append("service=" + String.valueOf(getService()) + ", ")
       .append("user=" + String.valueOf(getUser()) + ", ")
       .append("location=" + String.valueOf(getLocation()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
@@ -166,6 +176,7 @@ public final class Request implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -175,7 +186,8 @@ public final class Request implements Model {
       name,
       description,
       phone,
-      services,
+      isTaken,
+      service,
       user,
       location);
   }
@@ -189,7 +201,8 @@ public final class Request implements Model {
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep description(String description);
     BuildStep phone(String phone);
-    BuildStep services(Services services);
+    BuildStep isTaken(Boolean isTaken);
+    BuildStep service(Service service);
     BuildStep user(User user);
     BuildStep location(Location location);
   }
@@ -200,7 +213,8 @@ public final class Request implements Model {
     private String name;
     private String description;
     private String phone;
-    private Services services;
+    private Boolean isTaken;
+    private Service service;
     private User user;
     private Location location;
     @Override
@@ -212,7 +226,8 @@ public final class Request implements Model {
           name,
           description,
           phone,
-          services,
+          isTaken,
+          service,
           user,
           location);
     }
@@ -237,8 +252,14 @@ public final class Request implements Model {
     }
     
     @Override
-     public BuildStep services(Services services) {
-        this.services = services;
+     public BuildStep isTaken(Boolean isTaken) {
+        this.isTaken = isTaken;
+        return this;
+    }
+    
+    @Override
+     public BuildStep service(Service service) {
+        this.service = service;
         return this;
     }
     
@@ -266,12 +287,13 @@ public final class Request implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String description, String phone, Services services, User user, Location location) {
+    private CopyOfBuilder(String id, String name, String description, String phone, Boolean isTaken, Service service, User user, Location location) {
       super.id(id);
       super.name(name)
         .description(description)
         .phone(phone)
-        .services(services)
+        .isTaken(isTaken)
+        .service(service)
         .user(user)
         .location(location);
     }
@@ -292,8 +314,13 @@ public final class Request implements Model {
     }
     
     @Override
-     public CopyOfBuilder services(Services services) {
-      return (CopyOfBuilder) super.services(services);
+     public CopyOfBuilder isTaken(Boolean isTaken) {
+      return (CopyOfBuilder) super.isTaken(isTaken);
+    }
+    
+    @Override
+     public CopyOfBuilder service(Service service) {
+      return (CopyOfBuilder) super.service(service);
     }
     
     @Override

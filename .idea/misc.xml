@@ -5,10 +5,18 @@
       <map>
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/layout/activity_add_car.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/S4C/project401/car-care-center-CCC/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2203125" />
+        <entry key="..\:/Users/S4C/project401/car-care-center-CCC/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2203125" />
+        <entry key="..\:/Users/S4C/project401/car-care-center-CCC/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.1125" />
+        <entry key="..\:/Users/S4C/project401/car-care-center-CCC/app/src/main/res/drawable/ic_logo_2_.xml" value="0.2203125" />
+        <entry key="..\:/Users/S4C/project401/car-care-center-CCC/app/src/main/res/layout/activity_splash.xml" value="0.22" />
+        <entry key="..\:/Users/S4C/project401/car-care-center-CCC/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1125" />
+        <entry key="..\:/Users/S4C/project401/car-care-center-CCC/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1125" />
+        <entry key="..\:/Users/S4C/project401/car-care-center-CCC/app/src/main/res/mipmap-anydpi-v26/ic_launcher_roundd.xml" value="0.14907407407407408" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

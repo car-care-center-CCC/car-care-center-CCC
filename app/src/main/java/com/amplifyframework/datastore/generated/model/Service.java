@@ -17,15 +17,15 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Services type in your schema. */
+/** This is an auto generated class representing the Service type in your schema. */
 @SuppressWarnings("all")
 @ModelConfig(pluralName = "Services")
-public final class Services implements Model {
-  public static final QueryField ID = field("Services", "id");
-  public static final QueryField NAME = field("Services", "name");
+public final class Service implements Model {
+  public static final QueryField ID = field("Service", "id");
+  public static final QueryField NAME = field("Service", "name");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String name;
-  private final @ModelField(targetType="Request") @HasMany(associatedWith = "services", type = Request.class) List<Request> request = null;
+  private final @ModelField(targetType="Request") @HasMany(associatedWith = "service", type = Request.class) List<Request> request = null;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime createdAt;
   private @ModelField(targetType="AWSDateTime", isReadOnly = true) Temporal.DateTime updatedAt;
   public String getId() {
@@ -48,7 +48,7 @@ public final class Services implements Model {
       return updatedAt;
   }
   
-  private Services(String id, String name) {
+  private Service(String id, String name) {
     this.id = id;
     this.name = name;
   }
@@ -60,11 +60,11 @@ public final class Services implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Services services = (Services) obj;
-      return ObjectsCompat.equals(getId(), services.getId()) &&
-              ObjectsCompat.equals(getName(), services.getName()) &&
-              ObjectsCompat.equals(getCreatedAt(), services.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), services.getUpdatedAt());
+      Service service = (Service) obj;
+      return ObjectsCompat.equals(getId(), service.getId()) &&
+              ObjectsCompat.equals(getName(), service.getName()) &&
+              ObjectsCompat.equals(getCreatedAt(), service.getCreatedAt()) &&
+              ObjectsCompat.equals(getUpdatedAt(), service.getUpdatedAt());
       }
   }
   
@@ -82,7 +82,7 @@ public final class Services implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Services {")
+      .append("Service {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("name=" + String.valueOf(getName()) + ", ")
       .append("createdAt=" + String.valueOf(getCreatedAt()) + ", ")
@@ -104,7 +104,7 @@ public final class Services implements Model {
    * @return an instance of this model with only ID populated
    * @throws IllegalArgumentException Checks that ID is in the proper format
    */
-  public static Services justId(String id) {
+  public static Service justId(String id) {
     try {
       UUID.fromString(id); // Check that ID is in the UUID format - if not an exception is thrown
     } catch (Exception exception) {
@@ -114,7 +114,7 @@ public final class Services implements Model {
               "creating a new object, use the standard builder method and leave the ID field blank."
       );
     }
-    return new Services(
+    return new Service(
       id,
       null
     );
@@ -130,7 +130,7 @@ public final class Services implements Model {
   
 
   public interface BuildStep {
-    Services build();
+    Service build();
     BuildStep id(String id) throws IllegalArgumentException;
   }
   
@@ -139,10 +139,10 @@ public final class Services implements Model {
     private String id;
     private String name;
     @Override
-     public Services build() {
+     public Service build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Services(
+        return new Service(
           id,
           name);
     }
