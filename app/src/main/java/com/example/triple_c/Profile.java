@@ -2,17 +2,21 @@ package com.example.triple_c;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import androidx.collection.ArraySet;
+
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.os.Bundle;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.util.Log;
-import android.widget.Adapter;
-import android.widget.EditText;
-import android.widget.TextView;
+
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
@@ -24,13 +28,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Profile extends AppCompatActivity {
+    ArraySet<User> list = null;
 
     List<Request> responseList = new ArrayList<Request>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+
+
+
 
         TextView editText = findViewById(R.id.firstAndLastName);
 
@@ -119,14 +128,7 @@ public class Profile extends AppCompatActivity {
 
                                 if (true) {
                                     Log.i("MyAmplifyApp", "UpdateQuery");
-//                                    User userUpdate = User.builder()
-//                                            .username("Ali")
-//                                            .firstname("ibrahim")
-//                                            .lastname("alhamshari")
-//                                            .phone("0000000")
-//                                            .email("ibrahimalhamshari742@gmail.com")
-//                                            .id(user.getId())
-//                                            .build();
+
                                     User userUpdate = user.copyOfBuilder()
                                             .firstname("Hello")
                                             .lastname("Hello")
@@ -163,5 +165,6 @@ public class Profile extends AppCompatActivity {
                 },
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );
+
     }
 }
