@@ -1,10 +1,15 @@
 package com.example.triple_c;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.icu.text.CaseMap;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,12 +27,29 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
         this.allRequests = list;
     }
 
-    public static class RequestViewHolder extends RecyclerView.ViewHolder{
+    public static class RequestViewHolder extends RecyclerView.ViewHolder {
         public Request request;
-        View itemView ;
+        View itemView;
+
         public RequestViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.itemView=itemView;
+            this.itemView = itemView;
+
+            itemView.setOnClickListener(view -> {
+                Intent goToDetails = new Intent(itemView.getContext(), Details.class);
+                goToDetails.putExtra("requestName", request.getName());
+                goToDetails.putExtra("requestDescription", request.getDescription());
+                goToDetails.putExtra("phone", request.getPhone());
+                goToDetails.putExtra("username", request.getUser().getUsername());
+                goToDetails.putExtra("cityName", request.getOurLocation().getCityName());
+                goToDetails.putExtra("countryName", request.getOurLocation().getCountryName());
+                goToDetails.putExtra("lat", request.getOurLocation().getLatitude());
+                goToDetails.putExtra("lng", request.getOurLocation().getLongitude());
+                goToDetails.putExtra("carType", request.getCar().getType());
+                goToDetails.putExtra("carModel", request.getCar().getModel());
+                goToDetails.putExtra("gasoline", request.getCar().getGasoline());
+                itemView.getContext().startActivity(goToDetails);
+            });
 
         }
     }
@@ -35,14 +57,14 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
     @NonNull
     @Override
     public RequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_requests_in_profile , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_requests_in_profile, parent, false);
         return new RequestViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
-    holder.request = allRequests.get(position);
-        TextView requestName=holder.itemView.findViewById(R.id.requestNameInFragment);
+        holder.request = allRequests.get(position);
+        TextView requestName = holder.itemView.findViewById(R.id.requestNameInFragment);
         requestName.setText(holder.request.getName());
     }
 
