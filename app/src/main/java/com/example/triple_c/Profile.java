@@ -119,14 +119,7 @@ public class Profile extends AppCompatActivity {
 
                                 if (true) {
                                     Log.i("MyAmplifyApp", "UpdateQuery");
-//                                    User userUpdate = User.builder()
-//                                            .username("Ali")
-//                                            .firstname("ibrahim")
-//                                            .lastname("alhamshari")
-//                                            .phone("0000000")
-//                                            .email("ibrahimalhamshari742@gmail.com")
-//                                            .id(user.getId())
-//                                            .build();
+
                                     User userUpdate = user.copyOfBuilder()
                                             .firstname("Hello")
                                             .lastname("Hello")

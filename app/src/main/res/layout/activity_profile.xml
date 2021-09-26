@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#EDEDED"
     tools:context=".Profile">
 
     <ImageView
@@ -12,17 +13,17 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.056"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129"
+        app:layout_constraintVertical_bias="0.026"
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/firstAndLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
+        android:text="@string/textview"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,21 +36,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="TextView"
+        android:textColor="#4E342E"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/firstAndLastName"
-        app:layout_constraintVertical_bias="0.075" />
+        app:layout_constraintVertical_bias="0.041" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewInProfilePage"
-        android:layout_width="0dp"
-        android:layout_height="350dp"
+        android:layout_width="411dp"
+        android:layout_height="388dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameInProfile"
-        app:layout_constraintVertical_bias="0.652" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.797" />
 </androidx.constraintlayout.widget.ConstraintLayout>
