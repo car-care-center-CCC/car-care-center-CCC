@@ -36,6 +36,7 @@ public class SignIn extends AppCompatActivity {
                         handler1();
                         startActivity(new Intent(SignIn.this, MainActivity.class));
                     }else {
+                        handler2();
                         System.out.println("=================================" +result.isSignInComplete() );
                     }
                 },
