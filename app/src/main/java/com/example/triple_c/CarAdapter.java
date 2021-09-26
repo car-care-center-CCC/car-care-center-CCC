@@ -1,11 +1,13 @@
 package com.example.triple_c;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,10 +57,10 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull @NotNull CarViewHolder holder, int position) {
         holder.car = carList.get(position);
-        TextView title = holder.itemView.findViewById(R.id.typeInFrag);
-        TextView body = holder.itemView.findViewById(R.id.modelInFrag);
+        RadioButton title = holder.itemView.findViewById(R.id.typeInFrag);
+//        TextView body = holder.itemView.findViewById(R.id.modelInFrag);
         title.setText(holder.car.getType());
-        body.setText(holder.car.getModel());
+//        body.setText(holder.car.getModel());
     }
 
     @Override
