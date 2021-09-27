@@ -43,9 +43,6 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
                 Amplify.API.mutate(ModelMutation.delete(request),
                         result -> {
                             Log.i("MyAmplifyApp", "Todo with id: " + result.getData().getId());
-
-//                            finish();
-//                          Context.startActivity(intent);
                             Intent goToProfile = new Intent(itemView.getContext(), Profile.class);
                             itemView.getContext().startActivity(goToProfile);
                         },

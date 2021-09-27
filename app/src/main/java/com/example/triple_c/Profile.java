@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.collection.ArraySet;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -114,6 +115,13 @@ public class Profile extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+        Button moveToCar = findViewById(R.id.moveToCar);
+        moveToCar.setOnClickListener(view -> {
+            Intent moveToCarPage = new Intent(Profile.this, AddCar.class);
+            startActivity(moveToCarPage);
+        });
+
     }
 
     public void renderTheData() throws InterruptedException {
@@ -143,9 +151,6 @@ public class Profile extends AppCompatActivity {
                 },
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );
-
-        Button button=findViewById(R.id.deleteButton);
-
 
 //        Request request= new Request(" HI" , "Ibrahim" , "nothing" , "077445" , false, "washing", "ibrahim" , "");
         Thread.sleep(2000);
