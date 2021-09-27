@@ -22,6 +22,7 @@ import java.util.List;
 
 public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolder> {
 
+    public final static String TAG = MainActivity.class.getSimpleName();
     List<Request> allRequests = new ArrayList<Request>();
 
     public OurAdapter(List<Request> list) {
