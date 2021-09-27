@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -143,6 +144,8 @@ public class Profile extends AppCompatActivity {
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );
 
+        Button button=findViewById(R.id.deleteButton);
+
 
 //        Request request= new Request(" HI" , "Ibrahim" , "nothing" , "077445" , false, "washing", "ibrahim" , "");
         Thread.sleep(2000);
@@ -151,7 +154,7 @@ public class Profile extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    
+
 
     private void updateData() {
 
