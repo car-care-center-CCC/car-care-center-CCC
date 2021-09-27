@@ -1,5 +1,6 @@
 package com.example.triple_c;
 
+import android.content.Intent;
 import android.icu.text.CaseMap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,22 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
             super(itemView);
             this.itemView=itemView;
 
+            itemView.setOnClickListener(view -> {
+                Intent goToDetails = new Intent(itemView.getContext(), Details.class);
+                goToDetails.putExtra("requestName", request.getName());
+                goToDetails.putExtra("requestDescription", request.getDescription());
+                goToDetails.putExtra("phone", request.getPhone());
+                goToDetails.putExtra("username", request.getUser().getUsername());
+                goToDetails.putExtra("cityName", request.getOurLocation().getCityName());
+                goToDetails.putExtra("countryName", request.getOurLocation().getCountryName());
+                goToDetails.putExtra("lat", request.getOurLocation().getLatitude());
+                goToDetails.putExtra("lng", request.getOurLocation().getLongitude());
+                goToDetails.putExtra("carType", request.getCar().getType());
+                goToDetails.putExtra("carModel", request.getCar().getModel());
+                goToDetails.putExtra("gasoline", request.getCar().getGasoline());
+                itemView.getContext().startActivity(goToDetails);
+            });
+
         }
     }
 
@@ -43,7 +60,10 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
     public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
     holder.request = allRequests.get(position);
         TextView requestName=holder.itemView.findViewById(R.id.requestNameInFragment);
+        TextView car=holder.itemView.findViewById(R.id.carInFragment);
+
         requestName.setText(holder.request.getName());
+        car.setText(holder.request.getCar().getType().toString());
     }
 
     @Override
