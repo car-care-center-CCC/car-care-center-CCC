@@ -151,7 +151,7 @@ public class Profile extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    
+
 
     private void updateData() {
 
