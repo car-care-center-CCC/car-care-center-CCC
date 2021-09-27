@@ -47,7 +47,7 @@ public class AskForService extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     EditText serviceDescription, phoneNumber;
     TextView countryName, cityName, serviceName;
-    Button shareLocation, submit;
+    Button shareLocation, submit, addCar;
     FusedLocationProviderClient fusedLocationProviderClient;
     String countryNameStorage, cityNameStorage;
     Double longitudeStorage, latitudeStorage;
@@ -71,6 +71,7 @@ public class AskForService extends AppCompatActivity {
         cityName = findViewById(R.id.displayTheCity);
         shareLocation = findViewById(R.id.shareLocationBtn);
         submit = findViewById(R.id.submitBtn);
+        addCar = findViewById(R.id.addCarFromRequest);
 
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(AskForService.this);
         shareLocationListener();
@@ -116,22 +117,32 @@ public class AskForService extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
         submit.setOnClickListener(view -> {
             if (checked && !serviceDescription.getText().toString().equals("") && !phoneNumber.getText().toString().equals("")) {
-                String carId = sharedPreferences.getString("carId", "null");
-                Amplify.API.query(
-                        ModelQuery.get(Car.class, carId),
-                        response -> {
-                            Log.i("Car ================ ", response.getData().getId());
-                            car = response.getData();
-                            saveTheDataInTheCloud();
-                        },
-                        error -> Log.e("MyAmplifyApp", error.toString(), error)
-                );
+                String carId = sharedPreferences.getString("carId", "");
+                if (!carId.equals("")) {
+                    Amplify.API.query(
+                            ModelQuery.get(Car.class, carId),
+                            response -> {
+                                Log.i("Car ================ ", response.getData().getId());
+                                car = response.getData();
+                                saveTheDataInTheCloud();
+                            },
+                            error -> Log.e("MyAmplifyApp", error.toString(), error)
+                    );
+                }
             } else {
                 handler2();
             }
         });
+
+        ////////////////////////////// Function to move to add car ///////////////////////////
+        addCar.setOnClickListener(view -> {
+            Intent goToAddCar = new Intent(AskForService.this, AddCar.class);
+            startActivity(goToAddCar);
+        });
+
     }
 
     ////////////////////////////// Function to handle the listener of add location /////////////////////////////
@@ -209,7 +220,7 @@ public class AskForService extends AppCompatActivity {
                 .countryName(country != null ? country : "")
                 .cityName(city != null ? city : "")
                 .longitude(longitudeNumber != null ? longitudeNumber : 0.0)
-                .latitude(latitudeNumber != null ? longitudeNumber : 0.0)
+                .latitude(latitudeNumber != null ? latitudeNumber : 0.0)
                 .build();
         currentLocation = location;
 

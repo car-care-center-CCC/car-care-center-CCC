@@ -85,13 +85,13 @@ public class MainActivity extends AppCompatActivity {
 //        Button askForHelp = findViewById(R.id.askForServices);
         Button confirm = findViewById(R.id.confirmPagee);
         Button contactUs = findViewById(R.id.contactUs);
-        Button details = findViewById(R.id.details);
+//        Button details = findViewById(R.id.details);
         Button ourServicesPage = findViewById(R.id.ourServicesPage);
         Button profile = findViewById(R.id.profile);
         Button signIn = findViewById(R.id.signIn);
         Button signUp = findViewById(R.id.signUp);
         Button splash = findViewById(R.id.splash);
-        Button Details = findViewById(R.id.Details);
+//        Button Details = findViewById(R.id.Details);
 
         addCar.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, AddCar.class));
@@ -105,9 +105,9 @@ public class MainActivity extends AppCompatActivity {
         contactUs.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, ContactUs.class));
         });
-        details.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, Details.class));
-        });
+//        details.setOnClickListener(view -> {
+//            startActivity(new Intent(MainActivity.this, Details.class));
+//        });
         ourServicesPage.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, OurServices.class));
         });
@@ -123,9 +123,9 @@ public class MainActivity extends AppCompatActivity {
         splash.setOnClickListener(view -> {
             startActivity(new Intent(MainActivity.this, Splash.class));
         });
-        Details.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, Details.class));
-        });
+//        Details.setOnClickListener(view -> {
+//            startActivity(new Intent(MainActivity.this, Details.class));
+//        });
 
     }
 }

@@ -1,7 +1,7 @@
 package com.example.triple_c;
 
 import android.content.Intent;
-import android.icu.text.CaseMap;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +23,13 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
         this.allRequests = list;
     }
 
-    public static class RequestViewHolder extends RecyclerView.ViewHolder{
+    public static class RequestViewHolder extends RecyclerView.ViewHolder {
         public Request request;
-        View itemView ;
+        View itemView;
+
         public RequestViewHolder(@NonNull View itemView) {
             super(itemView);
-            this.itemView=itemView;
+            this.itemView = itemView;
 
             itemView.setOnClickListener(view -> {
                 Intent goToDetails = new Intent(itemView.getContext(), Details.class);
@@ -52,7 +53,7 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
     @NonNull
     @Override
     public RequestViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_requests_in_profile , parent , false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_requests_in_profile, parent, false);
         return new RequestViewHolder(view);
     }
 
