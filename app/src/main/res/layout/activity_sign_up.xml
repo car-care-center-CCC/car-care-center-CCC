@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:backgroundTint="#FFFFFF"
+    android:background="@color/browser_actions_bg_grey"
+    android:backgroundTint="#96EDEDED"
     android:paddingLeft="20dp"
     android:paddingTop="10dp"
     android:paddingRight="10dp"
@@ -184,5 +184,18 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/inputPhone"
         app:layout_constraintTop_toBottomOf="@+id/inputPhone" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="418dp"
+        android:layout_height="266dp"
+        android:alpha="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.538"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/inputPassword"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/city" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
