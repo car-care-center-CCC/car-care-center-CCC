@@ -4,30 +4,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/browser_actions_bg_grey"
+    android:backgroundTint="#96EDEDED"
     tools:context=".OurServices">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="409dp"
+        android:layout_height="729dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card1"
-            android:layout_width="184dp"
-            android:layout_height="211dp"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
             android:layout_margin="10dp"
-            android:layout_marginEnd="10dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
             app:cardMaxElevation="12dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.972"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.115">
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:layout_width="184dp"
-                android:layout_height="210dp"
+                android:layout_width="255dp"
+                android:layout_height="214dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:contentDescription="@string/app_name"
@@ -37,8 +43,34 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card2"
-            android:layout_width="184dp"
-            android:layout_height="211dp"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
+            android:layout_margin="10dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="4dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="10dp"
+            app:cardMaxElevation="12dp"
+            app:cardPreventCornerOverlap="true"
+            app:cardUseCompatPadding="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="225dp"
+                android:layout_height="213dp"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:contentDescription="@string/app_name"
+                app:srcCompat="@drawable/ser2" />
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card3"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
             android:layout_margin="10dp"
             android:layout_marginStart="10dp"
             app:cardBackgroundColor="@color/white"
@@ -47,46 +79,13 @@
             app:cardMaxElevation="12dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.004"
+            app:layout_constraintBottom_toTopOf="@+id/card5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.119">
+            app:layout_constraintTop_toBottomOf="@+id/card1">
 
             <ImageView
-                android:layout_width="184dp"
+                android:layout_width="239dp"
                 android:layout_height="212dp"
-                android:layout_gravity="center"
-                android:layout_margin="10dp"
-                android:contentDescription="@string/app_name"
-                app:srcCompat="@drawable/ser2" />
-
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card3"
-            android:layout_width="184dp"
-            android:layout_height="211dp"
-            android:layout_margin="10dp"
-            android:layout_marginEnd="10dp"
-            app:cardBackgroundColor="@color/white"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="10dp"
-            app:cardMaxElevation="12dp"
-            app:cardPreventCornerOverlap="true"
-            app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.782"
-            app:layout_constraintStart_toEndOf="@+id/card4"
-            app:layout_constraintTop_toBottomOf="@+id/card1"
-            app:layout_constraintVertical_bias="0.0">
-
-            <ImageView
-                android:layout_width="184dp"
-                android:layout_height="211dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:contentDescription="@string/app_name"
@@ -96,26 +95,23 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card4"
-            android:layout_width="184dp"
-            android:layout_height="211dp"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
             android:layout_margin="10dp"
-            android:layout_marginStart="16dp"
+            android:layout_marginEnd="1dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
             app:cardMaxElevation="12dp"
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/card6"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card2"
-            app:layout_constraintVertical_bias="0.0">
+            app:layout_constraintTop_toBottomOf="@+id/card2">
 
             <ImageView
-                android:layout_width="184dp"
-                android:layout_height="209dp"
+                android:layout_width="235dp"
+                android:layout_height="221dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:contentDescription="@string/app_name"
@@ -125,9 +121,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card5"
-            android:layout_width="184dp"
-            android:layout_height="211dp"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
             android:layout_margin="10dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginBottom="28dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
@@ -135,15 +133,11 @@
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/card4"
-            app:layout_constraintVertical_bias="0.526">
+            app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
-                android:layout_width="184dp"
-                android:layout_height="208dp"
+                android:layout_width="231dp"
+                android:layout_height="227dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:contentDescription="@string/app_name"
@@ -153,10 +147,11 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card6"
-            android:layout_width="184dp"
-            android:layout_height="211dp"
+            android:layout_width="200dp"
+            android:layout_height="240dp"
             android:layout_margin="10dp"
-            android:layout_marginEnd="10dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="22dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="20dp"
             app:cardElevation="10dp"
@@ -164,22 +159,17 @@
             app:cardPreventCornerOverlap="true"
             app:cardUseCompatPadding="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.739"
-            app:layout_constraintStart_toEndOf="@+id/card5"
-            app:layout_constraintTop_toBottomOf="@+id/card3"
-            app:layout_constraintVertical_bias="0.571">
+            app:layout_constraintEnd_toEndOf="parent">
 
             <ImageView
                 android:id="@+id/img"
-                android:layout_width="184dp"
-                android:layout_height="214dp"
+                android:layout_width="225dp"
+                android:layout_height="218dp"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:contentDescription="@string/app_name"
                 app:srcCompat="@drawable/ser6" />
 
         </androidx.cardview.widget.CardView>
-
-
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
