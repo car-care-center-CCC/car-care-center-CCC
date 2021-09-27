@@ -26,12 +26,13 @@ public class Confirm extends AppCompatActivity {
             Amplify.Auth.confirmSignUp(
                     usernameConfirm.getText().toString(),
                     confirmationInput.getText().toString(),
-                    result -> Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete"),
+                    result -> {
+                        Intent goSignIn = new Intent(Confirm.this, SignIn.class);
+                        startActivity(goSignIn);
+                        Log.i("AuthQuickstart", result.isSignUpComplete() ? "Confirm signUp succeeded" : "Confirm sign up not complete");
+                    },
                     error -> Log.e("AuthQuickstart", error.toString())
             );
-
-            Intent goHome = new Intent(Confirm.this, MainActivity.class);
-            startActivity(goHome);
         });
     }
 }
