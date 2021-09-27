@@ -18,10 +18,11 @@ type Request @model {
     isTaken: Boolean
     service: Service @connection(name: "requestService")
     user: User @connection(name: "userRequest")
-    location : Location @connection
+    ourLocation : OurLocation @connection
+    car : Car @connection
 }
 
-type Location @model {
+type OurLocation @model {
     id: ID!
     countryName : String!
     cityName : String!

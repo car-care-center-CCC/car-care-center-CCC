@@ -16,15 +16,15 @@ import com.amplifyframework.core.model.query.predicate.QueryField;
 
 import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
-/** This is an auto generated class representing the Location type in your schema. */
+/** This is an auto generated class representing the OurLocation type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Locations")
-public final class Location implements Model {
-  public static final QueryField ID = field("Location", "id");
-  public static final QueryField COUNTRY_NAME = field("Location", "countryName");
-  public static final QueryField CITY_NAME = field("Location", "cityName");
-  public static final QueryField LONGITUDE = field("Location", "longitude");
-  public static final QueryField LATITUDE = field("Location", "latitude");
+@ModelConfig(pluralName = "OurLocations")
+public final class OurLocation implements Model {
+  public static final QueryField ID = field("OurLocation", "id");
+  public static final QueryField COUNTRY_NAME = field("OurLocation", "countryName");
+  public static final QueryField CITY_NAME = field("OurLocation", "cityName");
+  public static final QueryField LONGITUDE = field("OurLocation", "longitude");
+  public static final QueryField LATITUDE = field("OurLocation", "latitude");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String", isRequired = true) String countryName;
   private final @ModelField(targetType="String", isRequired = true) String cityName;
@@ -60,7 +60,7 @@ public final class Location implements Model {
       return updatedAt;
   }
   
-  private Location(String id, String countryName, String cityName, Double longitude, Double latitude) {
+  private OurLocation(String id, String countryName, String cityName, Double longitude, Double latitude) {
     this.id = id;
     this.countryName = countryName;
     this.cityName = cityName;
@@ -75,14 +75,14 @@ public final class Location implements Model {
       } else if(obj == null || getClass() != obj.getClass()) {
         return false;
       } else {
-      Location location = (Location) obj;
-      return ObjectsCompat.equals(getId(), location.getId()) &&
-              ObjectsCompat.equals(getCountryName(), location.getCountryName()) &&
-              ObjectsCompat.equals(getCityName(), location.getCityName()) &&
-              ObjectsCompat.equals(getLongitude(), location.getLongitude()) &&
-              ObjectsCompat.equals(getLatitude(), location.getLatitude()) &&
-              ObjectsCompat.equals(getCreatedAt(), location.getCreatedAt()) &&
-              ObjectsCompat.equals(getUpdatedAt(), location.getUpdatedAt());
+      OurLocation ourLocation = (OurLocation) obj;
+      return ObjectsCompat.equals(getId(), ourLocation.getId()) &&
+              ObjectsCompat.equals(getCountryName(), ourLocation.getCountryName()) &&
+              ObjectsCompat.equals(getCityName(), ourLocation.getCityName()) &&
+              ObjectsCompat.equals(getLongitude(), ourLocation.getLongitude()) &&
+              ObjectsCompat.equals(getLatitude(), ourLocation.getLatitude()) &&
+              ObjectsCompat.equals(getCreatedAt(), ourLocation.getCreatedAt()) &&
+              ObjectsCompat.equals(getUpdatedAt(), ourLocation.getUpdatedAt());
       }
   }
   
@@ -103,7 +103,7 @@ public final class Location implements Model {
   @Override
    public String toString() {
     return new StringBuilder()
-      .append("Location {")
+      .append("OurLocation {")
       .append("id=" + String.valueOf(getId()) + ", ")
       .append("countryName=" + String.valueOf(getCountryName()) + ", ")
       .append("cityName=" + String.valueOf(getCityName()) + ", ")
@@ -128,7 +128,7 @@ public final class Location implements Model {
    * @return an instance of this model with only ID populated
    * @throws IllegalArgumentException Checks that ID is in the proper format
    */
-  public static Location justId(String id) {
+  public static OurLocation justId(String id) {
     try {
       UUID.fromString(id); // Check that ID is in the UUID format - if not an exception is thrown
     } catch (Exception exception) {
@@ -138,7 +138,7 @@ public final class Location implements Model {
               "creating a new object, use the standard builder method and leave the ID field blank."
       );
     }
-    return new Location(
+    return new OurLocation(
       id,
       null,
       null,
@@ -175,7 +175,7 @@ public final class Location implements Model {
   
 
   public interface BuildStep {
-    Location build();
+    OurLocation build();
     BuildStep id(String id) throws IllegalArgumentException;
   }
   
@@ -187,10 +187,10 @@ public final class Location implements Model {
     private Double longitude;
     private Double latitude;
     @Override
-     public Location build() {
+     public OurLocation build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
-        return new Location(
+        return new OurLocation(
           id,
           countryName,
           cityName,
