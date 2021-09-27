@@ -7,9 +7,10 @@
     tools:context=".AddCar">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="409dp"
-        android:layout_height="230dp"
-        android:background="#042C5A"
+        android:id="@+id/constraintLayout3"
+        android:layout_width="0dp"
+        android:layout_height="250dp"
+        android:background="@drawable/addcar_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,7 +20,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:layout_marginEnd="20dp"
             android:layout_marginBottom="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -34,6 +35,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:fontFamily="@font/bangers"
             android:text="YOUR CARS"
             android:textColor="#FFFFFF"
             android:textSize="25dp"
@@ -43,127 +45,118 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-        android:id="@+id/carTypeTextView"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Car type"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3"
+        app:layout_constraintVertical_bias="0.508">
 
-    <EditText
-        android:id="@+id/editTextCarType"
-        android:layout_width="118dp"
-        android:layout_height="42dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.191"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.483" />
+        <EditText
+            android:id="@+id/editTextCarModel"
+            android:layout_width="125dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carModelTextView" />
 
-
-    <TextView
-        android:id="@+id/carModelTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Car Model"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.161"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.598" />
-
-    <EditText
-        android:id="@+id/editTextCarModel"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.183"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.659" />
-
-
-    <TextView
-        android:id="@+id/chooseTeamTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Choose a team"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.731"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.422" />
-
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="122dp"
-        android:layout_height="210dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.802"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.614">
-
-        <RadioButton
-            android:id="@+id/Octane90"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/carTypeTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Octane-90" />
+            android:text="Car type"
+            android:textColor="#042C5A"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <RadioButton
-            android:id="@+id/Octane95"
-            android:layout_width="match_parent"
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
             android:layout_marginTop="20dp"
-            android:text="Octane-95" />
+            app:layout_constraintStart_toEndOf="@+id/editTextCarModel"
+            app:layout_constraintTop_toBottomOf="@+id/chooseTeamTextView">
 
-        <RadioButton
-            android:id="@+id/diesel"
-            android:layout_width="match_parent"
+            <RadioButton
+                android:id="@+id/Octane90"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Octane-90" />
+
+            <RadioButton
+                android:id="@+id/Octane95"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Octane-95" />
+
+            <RadioButton
+                android:id="@+id/diesel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Diesel" />
+
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/carModelTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Diesel" />
+            android:layout_marginTop="45dp"
+            android:text="Car Model"
+            android:textColor="#042C5A"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCarType" />
 
-    </RadioGroup>
+        <TextView
+            android:id="@+id/chooseTeamTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:text="Choose a team"
+            android:textColor="#042C5A"
+            app:layout_constraintStart_toEndOf="@+id/editTextCarType"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/buttonGoProfile"
-        android:layout_width="123dp"
-        android:layout_height="48dp"
-        android:text="Profile"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.805"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.836" />
+        <EditText
+            android:id="@+id/editTextCarType"
+            android:layout_width="125dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="5dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carTypeTextView" />
 
-    <Button
-        android:id="@+id/addCar"
-        android:layout_width="123dp"
-        android:layout_height="48dp"
-        android:text="Add Car"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.218"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.836" />
+        <Button
+            android:id="@+id/buttonGoProfile"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/void_button_pg"
+            android:text="Profile"
+            android:textColor="#042C5A"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <Button
+            android:id="@+id/addCar"
+            android:layout_width="110dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="70dp"
+            android:background="@drawable/button_background_white"
+            android:text="Add Car"
+            android:textColor="#042C5A"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextCarModel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

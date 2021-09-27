@@ -28,7 +28,6 @@ import java.util.List;
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
 
     List<Car> carList = new ArrayList<Car>();
-    public final static String TAG = AskForService.class.getSimpleName();
 
     public CarAdapter(List<Car> carList) {
         this.carList = carList;
@@ -42,7 +41,6 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
             super(itemView);
             this.itemView = itemView;
 
-            System.out.println("************************************ " + TAG);
             TextView carDeleteButton =itemView.findViewById(R.id.carDeleteButton);
 
             carDeleteButton.setOnClickListener((v)->{
