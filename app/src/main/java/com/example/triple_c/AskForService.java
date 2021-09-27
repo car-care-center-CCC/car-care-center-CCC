@@ -46,8 +46,8 @@ public class AskForService extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     EditText serviceDescription, phoneNumber;
-    TextView countryName, cityName, serviceName;
-    Button shareLocation, submit, addCar;
+    TextView countryName, cityName, serviceName, addCar;
+    Button shareLocation, submit;
     FusedLocationProviderClient fusedLocationProviderClient;
     String countryNameStorage, cityNameStorage;
     Double longitudeStorage, latitudeStorage;
