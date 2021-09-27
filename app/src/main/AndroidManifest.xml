@@ -19,13 +19,19 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCFVeQy3P1q38fXL54yy5OJ6KQ68yoy9gw" />
+
         <activity
             android:name=".AddCar"
             android:exported="true" />
         <activity
             android:name=".Splash"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ContactUs"
             android:exported="true" />
@@ -44,22 +50,17 @@
         <activity
             android:name=".Confirm"
             android:exported="true"
-            android:parentActivityName=".SignUp"/>
+            android:parentActivityName=".SignUp" />
         <activity
             android:name=".SignUp"
             android:exported="true"
-            android:parentActivityName=".SignIn"/>
+            android:parentActivityName=".SignIn" />
         <activity
             android:name=".SignIn"
             android:exported="true" />
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:exported="true"></activity>
 
         <meta-data
             android:name="preloaded_fonts"
