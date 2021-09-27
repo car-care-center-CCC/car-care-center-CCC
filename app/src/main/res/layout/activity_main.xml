@@ -1,41 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/backgroundmain"
+    tools:context=".OurServices">
 
-<LinearLayout android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:orientation="vertical"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-
-    >
 
     <RelativeLayout
         android:id="@+id/servicesmain"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/BabyBlue"
         android:layout_margin="20dp"
-       >
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/layout_bg"
+        android:backgroundTint="#E2EAED"
+        app:layout_constraintBottom_toTopOf="@+id/profilemain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Our Services"
-            android:textSize="30sp"
             android:fontFamily="@font/bangers"
-            android:textColor="@color/DarkGray"
-            android:padding="25dp"/>
+            android:padding="25dp"
+            android:text="Our Services"
+            android:textColor="#042C5A"
+            android:textSize="30sp" />
 
 
         <Button
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Expand All"
-            android:fontFamily="@font/antic"
+            android:layout_alignParentBottom="true"
             android:background="#00000000"
+            android:fontFamily="@font/antic"
             android:padding="20dp"
-            android:textColor="@color/DarkGray"
-            android:layout_alignParentBottom="true"/>
+            android:text="Expand All"
+            android:textColor="@color/DarkGray" />
 
         <ImageView
             android:layout_width="150dp"
@@ -51,46 +57,58 @@
         android:id="@+id/profilemain"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/DarkGray"
-        android:layout_margin="20dp">
+        android:layout_margin="20dp"
+        android:background="@drawable/layout_bg"
+        android:backgroundTint="#E2EAED"
+        app:layout_constraintBottom_toTopOf="@+id/contactusmain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.4"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Profile"
-            android:textSize="30sp"
             android:fontFamily="@font/bangers"
-            android:textColor="@color/BabyBlue"
-            android:padding="25dp"/>
+            android:padding="25dp"
+            android:text="Profile"
+            android:textColor="#042C5A"
+            android:textSize="30sp" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Expand All"
-            android:fontFamily="@font/antic"
+            android:layout_alignParentBottom="true"
             android:background="#00000000"
+            android:fontFamily="@font/antic"
             android:padding="20dp"
-            android:textColor="@color/BabyBlue"
-            android:layout_alignParentBottom="true"/>
+            android:text="Expand All"
+            android:textColor="@color/BabyBlue" />
 
         <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:src="@drawable/profilefinal"
-            android:layout_marginTop="0dp"
+            android:layout_width="125dp"
+            android:layout_height="118dp"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginRight="6dp"
+            android:backgroundTint="#042C5A"
             android:scaleX="1.1"
-            android:scaleY="1"/>
+            android:scaleY="1"
+            android:src="@drawable/profilefinal" />
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/contactusmain"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@color/BabyBlue"
         android:layout_margin="20dp"
-
-        >
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/layout_bg"
+        android:backgroundTint="#E2EAED"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
@@ -98,7 +116,7 @@
             android:fontFamily="@font/bangers"
             android:padding="25dp"
             android:text="Contact Us"
-            android:textColor="@color/DarkGray"
+            android:textColor="#042C5A"
             android:textSize="30sp" />
 
         <Button
@@ -122,21 +140,21 @@
 
 
     </RelativeLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        >
-        <Button
+
+    <Button
         android:id="@+id/signoutButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@color/yellow"
+
         android:text="Sign out"
-        android:layout_marginTop="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.235" />
 
 
-        />
-</LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
