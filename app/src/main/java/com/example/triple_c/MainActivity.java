@@ -36,17 +36,6 @@ public class MainActivity extends AppCompatActivity {
 
             Amplify.configure(getApplicationContext());
 
-/////////////// Adding Services as a hard coded /////////////////
-
-//            Service service = Service.builder()
-//                    .name("Fuel Supply")
-//                    .build();
-//
-//            Amplify.API.mutate(
-//                    ModelMutation.create(service),
-//                    response -> Log.i("MyAmplifyApp", "Added Todo with id: " + response.getData().getId()),
-//                    error -> Log.e("MyAmplifyApp", "Create failed", error)
-//            );
 
             Log.i("MyAmplifyApp", "Initialized Amplify");
         } catch (AmplifyException error) {
@@ -72,9 +61,6 @@ public class MainActivity extends AppCompatActivity {
                     error -> Log.e("MyAmplifyApp", error.toString(), error)
             );
         }
-
-
-        // // // // // // // // // // // // // // // // // // // // // // // // // // //
         Button signoutButton = findViewById(R.id.signoutButton);
         signoutButton.setOnClickListener(v -> {
             Amplify.Auth.signOut(
@@ -83,17 +69,18 @@ public class MainActivity extends AppCompatActivity {
             );
         });
 
+
         RelativeLayout serviscesMain =findViewById(R.id.servicesmain);
         RelativeLayout profilemain =findViewById(R.id.profilemain);
         RelativeLayout contactusmain =findViewById(R.id.contactusmain);
 
         serviscesMain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent goToOurServices=new Intent(MainActivity.this,OurServices.class);
-                startActivity(goToOurServices);
-            }
-        });
+                                             @Override
+                                             public void onClick(View view) {
+                                                 Intent goToOurServices = new Intent(MainActivity.this, OurServices.class);
+                                                 startActivity(goToOurServices);
+                                             }
+                                         });
 
         profilemain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToProfileMain);
             }
         });
+
         contactusmain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,51 +98,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Button addCar = findViewById(R.id.addCarButton);
-////        Button askForHelp = findViewById(R.id.askForServices);
-//        Button confirm = findViewById(R.id.confirmPagee);
-//        Button contactUs = findViewById(R.id.contactUs);
-//        Button details = findViewById(R.id.details);
-//        Button ourServicesPage = findViewById(R.id.ourServicesPage);
-//        Button profile = findViewById(R.id.profile);
-//        Button signIn = findViewById(R.id.signIn);
-//        Button signUp = findViewById(R.id.signUp);
-//        Button splash = findViewById(R.id.splash);
-//        Button Details = findViewById(R.id.Details);
-
-//        addCar.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, AddCar.class));
-//        });
-////        askForHelp.setOnClickListener(view -> {
-////            startActivity(new Intent(MainActivity.this, AskForService.class));
-////        });
-//        confirm.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, Confirm.class));
-//        });
-//        contactUs.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, ContactUs.class));
-//        });
-//        details.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, Details.class));
-//        });
-//        ourServicesPage.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, OurServices.class));
-//        });
-//        profile.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, Profile.class));
-//        });
-//        signIn.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, SignIn.class));
-//        });
-//        signUp.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, SignUp.class));
-//        });
-//        splash.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, Splash.class));
-//        });
-//        Details.setOnClickListener(view -> {
-//            startActivity(new Intent(MainActivity.this, Details.class));
-//        });
-
     }
 }
+
+

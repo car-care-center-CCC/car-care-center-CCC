@@ -64,4 +64,18 @@
         app:layout_constraintVertical_bias="0.202"
         android:drawableLeft="@drawable/ic_baseline_person_24"
         android:drawablePadding="5dp"/>
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="370dp"
+        android:layout_height="345dp"
+        android:layout_marginTop="3dp"
+        android:alpha="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmationInput"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/ffdd" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

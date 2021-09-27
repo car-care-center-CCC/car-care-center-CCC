@@ -1,14 +1,13 @@
 package com.example.triple_c;
 
-import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +18,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
@@ -37,12 +37,20 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
             super(itemView);
             this.itemView = itemView;
 
-            itemView.setOnClickListener((view -> {
+            itemView.setOnClickListener(view -> {
+                view.setBackgroundColor(Color.parseColor("#E6E6E6"));
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
                 SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
                 sharedPreferencesEditor.putString("carId", car.getId());
+                Toast.makeText(itemView.getContext(), "Car Selected Successfully!", Toast.LENGTH_LONG).show();
                 sharedPreferencesEditor.apply();
-            }));
+                itemView.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                    }
+                }, 150);
+            });
         }
     }
     
@@ -57,10 +65,10 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull @NotNull CarViewHolder holder, int position) {
         holder.car = carList.get(position);
-        RadioButton title = holder.itemView.findViewById(R.id.typeInFrag);
-//        TextView body = holder.itemView.findViewById(R.id.modelInFrag);
-        title.setText(holder.car.getType());
-//        body.setText(holder.car.getModel());
+        TextView type = holder.itemView.findViewById(R.id.typeInFrag);
+        TextView model = holder.itemView.findViewById(R.id.modelInFrag);
+        type.setText(holder.car.getType());
+        model.setText(holder.car.getModel());
     }
 
     @Override

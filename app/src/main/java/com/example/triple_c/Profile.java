@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.collection.ArraySet;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.TextView;
 
@@ -21,17 +23,19 @@ import android.os.Message;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.Car;
 import com.amplifyframework.datastore.generated.model.Request;
 import com.amplifyframework.datastore.generated.model.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Profile extends AppCompatActivity {
     ArraySet<User> list = null;
 
     List<Request> responseList = new ArrayList<Request>();
-
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,30 +47,66 @@ public class Profile extends AppCompatActivity {
 
         TextView editText = findViewById(R.id.firstAndLastName);
 
+//        Amplify.API.query(
+//                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
+//                response -> {
+//
+//                    for (User todo : response.getData()) {
+//                        Log.i("MyAmplifyApp", todo.getFirstname());
+//                        if (todo.getFirstname().equals("ibrahim")) {
+////                            responseList.add(todo);
+//
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    editText.setText(todo.getFirstname() + " " + todo.getLastname());
+//                                }
+//                            });
+//                            System.out.println("============" + todo.getFirstname());
+//                            System.out.println("============" + todo.getCreatedAt());
+//                        }
+//
+//                    }
+////                    handler.sendEmptyMessage(1); // send to the handler
+//                },
+//                error -> Log.e("MyAmplifyApp", "Query failure", error)
+//        );
+
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Profile.this);
+        String userId = sharedPreferences.getString("userId", "");
+
         Amplify.API.query(
-                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
+                ModelQuery.get(User.class, userId),
                 response -> {
+                    user = response.getData();
+                    Log.i("User ================ ", response.getData().getUsername());
+                    responseList=user.getRequest();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            String allTheFirstName= user.getFirstname();
+                            String firstLetter = allTheFirstName.substring(0, 1);// get First letter of the string
+                            String remLettersString= allTheFirstName.substring(1).toLowerCase();// Get remaining letter using substring
 
-                    for (User todo : response.getData()) {
-                        Log.i("MyAmplifyApp", todo.getFirstname());
-                        if (todo.getFirstname().equals("ibrahim")) {
-//                            responseList.add(todo);
+                            firstLetter=firstLetter.toUpperCase();
+                           String firstLetterCapitalizedName=firstLetter+remLettersString;
 
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    editText.setText(todo.getFirstname() + " " + todo.getLastname());
-                                }
-                            });
-                            System.out.println("============" + todo.getFirstname());
-                            System.out.println("============" + todo.getCreatedAt());
+                           String allLastName=user.getLastname();
+                           String firstLetterLastName=allLastName.substring(0,1);
+                           String remLastName=allLastName.substring(1).toLowerCase();
+
+                            firstLetterLastName=firstLetterLastName.toUpperCase();
+                            String lastName=firstLetterLastName+remLastName;
+
+//                            responseList=user.getRequest();
+                            editText.setText(firstLetterCapitalizedName + " " + lastName);
                         }
+                    });
 
-                    }
-//                    handler.sendEmptyMessage(1); // send to the handler
                 },
-                error -> Log.e("MyAmplifyApp", "Query failure", error)
+                error -> Log.e("MyAmplifyApp", error.toString(), error)
         );
+
 
         try {
             renderTheData();
@@ -111,9 +151,7 @@ public class Profile extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-
-
-
+    
 
     private void updateData() {
 
