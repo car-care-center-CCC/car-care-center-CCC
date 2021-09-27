@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/browser_actions_bg_grey"
+    android:backgroundTint="#96EDEDED"
     tools:context=".SignIn">
 
     <EditText
@@ -41,7 +43,8 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/passwordSignin"
         app:layout_constraintTop_toBottomOf="@+id/passwordSignin"
-        app:layout_constraintVertical_bias="0.11" />
+        app:layout_constraintVertical_bias="0.11"
+        android:background="@drawable/botton_pg"/>
 
     <EditText
         android:id="@+id/passwordSignin"
@@ -78,7 +81,7 @@
         app:layout_constraintHorizontal_bias="0.241"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/signinButton"
-        app:layout_constraintVertical_bias="0.171" />
+        app:layout_constraintVertical_bias="0.104" />
 
     <TextView
         android:id="@+id/signUpInSignIn"
@@ -93,6 +96,19 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toEndOf="@+id/textView4"
         app:layout_constraintTop_toBottomOf="@+id/signinButton"
-        app:layout_constraintVertical_bias="0.169" />
+        app:layout_constraintVertical_bias="0.104" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="425dp"
+        android:layout_height="295dp"
+        android:alpha="0.4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/cars" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
