@@ -1,15 +1,20 @@
 package com.example.triple_c;
 
+import android.content.Context;
 import android.content.Intent;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Request;
 
 import java.util.ArrayList;
@@ -30,6 +35,25 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
         public RequestViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
+
+            TextView textView =itemView.findViewById(R.id.deleteButton);
+
+            textView.setOnClickListener((v)->{
+                Amplify.API.mutate(ModelMutation.delete(request),
+                        result -> {
+                            Log.i("MyAmplifyApp", "Todo with id: " + result.getData().getId());
+
+//                            finish();
+//                          Context.startActivity(intent);
+                            Intent goToProfile = new Intent(itemView.getContext(), Profile.class);
+                            itemView.getContext().startActivity(goToProfile);
+                        },
+                        error -> {
+                            Log.e("MyAmplifyApp", "Create failed", error);
+                        }
+                );
+
+            });
 
             itemView.setOnClickListener(view -> {
                 Intent goToDetails = new Intent(itemView.getContext(), Details.class);
