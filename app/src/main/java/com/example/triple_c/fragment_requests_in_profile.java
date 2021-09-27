@@ -18,11 +18,11 @@ public class fragment_requests_in_profile extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "name";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM2 = "car";
 
     // TODO: Rename and change types of parameters
     private String mName;
-    private String mParam2;
+    private String mCar;
 
     public fragment_requests_in_profile() {
         // Required empty public constructor
@@ -33,15 +33,15 @@ public class fragment_requests_in_profile extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param mName Parameter 1.
-     * @param param2 Parameter 2.
+     * @param mCar Parameter 2.
      * @return A new instance of fragment fragment_requests_in_profile.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_requests_in_profile newInstance(String mName, String param2) {
+    public static fragment_requests_in_profile newInstance(String mName, String mCar) {
         fragment_requests_in_profile fragment = new fragment_requests_in_profile();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, mName);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_PARAM2, mCar);
         fragment.setArguments(args);
         return fragment;
     }
@@ -51,7 +51,7 @@ public class fragment_requests_in_profile extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mName = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            mCar = getArguments().getString(ARG_PARAM2);
         }
     }
 

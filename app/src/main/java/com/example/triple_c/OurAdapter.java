@@ -1,15 +1,11 @@
 package com.example.triple_c;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.icu.text.CaseMap;
-import android.preference.PreferenceManager;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -63,9 +59,12 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
 
     @Override
     public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
-        holder.request = allRequests.get(position);
-        TextView requestName = holder.itemView.findViewById(R.id.requestNameInFragment);
+    holder.request = allRequests.get(position);
+        TextView requestName=holder.itemView.findViewById(R.id.requestNameInFragment);
+        TextView car=holder.itemView.findViewById(R.id.carInFragment);
+
         requestName.setText(holder.request.getName());
+        car.setText(holder.request.getCar().getType().toString());
     }
 
     @Override
