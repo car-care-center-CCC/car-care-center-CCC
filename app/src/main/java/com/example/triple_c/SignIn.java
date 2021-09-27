@@ -25,23 +25,25 @@ public class SignIn extends AppCompatActivity {
         EditText username = findViewById(R.id.usernameSignin);
         EditText password = findViewById(R.id.passwordSignin);
         Button signin = findViewById(R.id.signinButton);
-        TextView goToSignUp =findViewById(R.id.signUpInSignIn);
+        TextView goToSignUp = findViewById(R.id.signUpInSignIn);
 
-        signin.setOnClickListener(v-> Amplify.Auth.signIn(
+        signin.setOnClickListener(v -> Amplify.Auth.signIn(
                 username.getText().toString(),
                 password.getText().toString(),
                 result -> {
                     Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
-                    if(result.isSignInComplete()){
+                    if (result.isSignInComplete()) {
                         handler1();
-                        startActivity(new Intent(SignIn.this, MainActivity.class));
-                    }else {
+                        Intent goToMain = new Intent(SignIn.this, MainActivity.class);
+                        startActivity(goToMain);
+                        finish();
+                    } else {
                         handler2();
-                        System.out.println("=================================" +result.isSignInComplete() );
+                        System.out.println("=================================" + result.isSignInComplete());
                     }
                 },
 
-                error ->{
+                error -> {
                     Log.e("AuthQuickstart", error.toString());
                     System.out.println("========================" + error.toString());
                     handler2();
@@ -51,7 +53,7 @@ public class SignIn extends AppCompatActivity {
         goToSignUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(SignIn.this , SignUp.class);
+                Intent intent = new Intent(SignIn.this, SignUp.class);
                 startActivity(intent);
             }
         });
@@ -59,21 +61,21 @@ public class SignIn extends AppCompatActivity {
     }
 
 
-    public void  handler1(){
+    public void handler1() {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext() , "Success!" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Success!", Toast.LENGTH_LONG).show();
             }
         });
     }
 
 
-    public void  handler2(){
+    public void handler2() {
         new Handler(Looper.getMainLooper()).post(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(getApplicationContext() , "Incorrect username or password!" , Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "Incorrect username or password!", Toast.LENGTH_LONG).show();
             }
         });
     }
