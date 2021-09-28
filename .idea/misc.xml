@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/drawable/addcar_bg.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/drawable/ahmad.xml" value="0.24722222222222223" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/drawable/botton_pg.xml" value="0.2601851851851852" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/drawable/button_background_white.xml" value="0.24444444444444444" />
@@ -14,6 +15,7 @@
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/drawable/input_pg.xml" value="0.2601851851851852" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/drawable/profile_background.xml" value="0.24722222222222223" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/drawable/recyclerview_components.xml" value="0.24722222222222223" />
+        <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/drawable/requests_profile_bg.xml" value="0.24166666666666667" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/layout/activity_add_car.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/layout/activity_ask_for_service.xml" value="0.264" />
         <entry key="..\:/Users/Discovery/code401/car-care-center-CCC/app/src/main/res/layout/activity_confirm.xml" value="0.25416666666666665" />
