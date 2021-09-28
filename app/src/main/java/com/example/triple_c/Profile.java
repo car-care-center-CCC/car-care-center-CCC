@@ -206,6 +206,19 @@ public class Profile extends AppCompatActivity {
             startActivityForResult(chooseFile, 1234);
         });
 
+        TextView signOutFromProfile = findViewById(R.id.signOutProfile);
+        signOutFromProfile.setOnClickListener(v -> {
+            Amplify.Auth.signOut(
+                    () -> {
+                        Log.i("AuthQuickstart", "Signed out successfully");
+                        Intent goToSignIn = new Intent(Profile.this, SignIn.class);
+                        startActivity(goToSignIn);
+                        finish();
+                    },
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
+        });
+
     }
 
     public void renderTheData() {

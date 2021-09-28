@@ -87,18 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("MyAmplifyApp", error.toString(), error)
         );
 
-        Button signoutButton = findViewById(R.id.signoutButton);
-        signoutButton.setOnClickListener(v -> {
-            Amplify.Auth.signOut(
-                    () -> {
-                        Log.i("AuthQuickstart", "Signed out successfully");
-                        Intent goToSignIn = new Intent(MainActivity.this, SignIn.class);
-                        startActivity(goToSignIn);
-                        finish();
-                    },
-                    error -> Log.e("AuthQuickstart", error.toString())
-            );
-        });
 
 
         RelativeLayout serviscesMain = findViewById(R.id.servicesmain);

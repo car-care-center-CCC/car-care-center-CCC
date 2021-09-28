@@ -52,25 +52,24 @@
             android:id="@+id/userNameInProfile"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
+            android:layout_marginTop="25dp"
             android:text="My Requests"
             android:textColor="#E2EAED"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonsContener" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerViewInProfilePage"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="280dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/userNameInProfile"
-            app:layout_constraintVertical_bias="0.428" />
+            app:layout_constraintTop_toBottomOf="@+id/userNameInProfile" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/buttonsContener"
@@ -78,48 +77,33 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="35dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/recyclerViewInProfilePage">
 
-            <TextView
+            <Button
                 android:id="@+id/moveToCar"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:background="@drawable/ic_baseline_add_profile"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <TextView
-                android:id="@+id/moveToServicePage"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginStart="80dp"
-                android:background="@drawable/ic_baseline_add_profile"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/moveToCar"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView17"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:background="@drawable/void_button_pg"
                 android:text="Add/view cars"
                 android:textColor="@color/yellow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/moveToCar" />
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView18"
-                android:layout_width="80dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:gravity="center"
-                android:text="Add new request"
-                android:textColor="@color/yellow"
+            <Button
+                android:id="@+id/moveToServicePage"
+                android:layout_width="130dp"
+                android:layout_height="50dp"
+                android:layout_marginStart="50dp"
+                android:background="@drawable/button_background_white"
+                android:text="New request"
+                android:textColor="#042C5A"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/moveToServicePage" />
+                app:layout_constraintStart_toEndOf="@+id/moveToCar"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -131,17 +115,18 @@
         android:layout_marginTop="-30dp"
         android:layout_marginEnd="-30dp"
         android:text="➕"
-        android:textColor="#042C5A"
+        android:textColor="@color/yellow"
         app:layout_constraintEnd_toStartOf="@+id/profilePic"
         app:layout_constraintTop_toBottomOf="@+id/profilePic" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/signOutProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:text="Sign-out"
+        android:textColor="#042C5A"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
