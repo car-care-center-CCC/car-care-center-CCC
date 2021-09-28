@@ -4,15 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#042C5A"
     android:scrollbarDefaultDelayBeforeFade="500"
     android:scrollbarFadeDuration="300"
     tools:context=".Profile">
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView"
-        android:layout_width="137dp"
-        android:layout_height="125dp"
+        android:id="@+id/profilePic"
+        android:layout_width="99dp"
+        android:layout_height="91dp"
         android:layout_marginTop="24dp"
+        android:background="#05363C"
+        android:backgroundTint="#05363C"
         app:circularflow_defaultRadius="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.478"
@@ -25,72 +28,72 @@
         android:id="@+id/firstAndLastName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000000"
+        android:textColor="#FFFFFF"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
+        app:layout_constraintTop_toBottomOf="@+id/profilePic"
         app:layout_constraintVertical_bias="0.041" />
 
-    <TextView
-        android:id="@+id/userNameInProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="15dp"
-        android:layout_marginBottom="10dp"
-        android:text="My Requests"
-        android:textColor="#4E342E"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.003"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstAndLastName"
-        app:layout_constraintVertical_bias="0.339" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewInProfilePage"
-        android:layout_width="385dp"
-        android:layout_height="296dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginEnd="15dp"
-        android:background="#EDEDED"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="414dp"
+        android:background="@drawable/profile_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/userNameInProfile"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/moveToCar"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/userNameInProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:text="My Requests"
+            android:textColor="#042C5A"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.003"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.082" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewInProfilePage"
+            android:layout_width="0dp"
+            android:layout_height="327dp"
+            android:layout_marginTop="10dp"
+            android:background="#042C5A"
+            android:paddingBottom="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/userNameInProfile"
+            app:layout_constraintVertical_bias="1.0" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="To see your cars and add them go here"
+        android:textColor="#FFFFFF"
         android:textSize="17sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewInProfilePage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/firstAndLastName"
-        app:layout_constraintVertical_bias="0.125" />
-
-    <view
-        class="androidx.appcompat.widget.ActionMenuView"
-        android:layout_width="411dp"
-        android:layout_height="14dp"
-        android:layout_marginTop="80dp"
-        android:background="#EDEDED"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+        app:layout_constraintTop_toBottomOf="@+id/firstAndLastName" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/moveToCar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
@@ -99,5 +102,15 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <Button
+        android:id="@+id/addPhoto"
+        android:layout_width="39dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="-30dp"
+        android:layout_marginEnd="-30dp"
+        android:text="➕"
+        app:layout_constraintEnd_toStartOf="@+id/profilePic"
+        app:layout_constraintTop_toBottomOf="@+id/profilePic" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

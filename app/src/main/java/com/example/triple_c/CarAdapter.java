@@ -1,8 +1,10 @@
 package com.example.triple_c;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Car;
 
 import org.jetbrains.annotations.NotNull;
@@ -36,6 +40,20 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
         public CarViewHolder(@NonNull View itemView) {
             super(itemView);
             this.itemView = itemView;
+
+            TextView carDeleteButton =itemView.findViewById(R.id.carDeleteButton);
+
+            carDeleteButton.setOnClickListener((v)->{
+                Amplify.API.mutate(ModelMutation.delete(car),
+                        result -> {
+                            Log.i("MyAmplifyApp", "Todo with id: " + result.getData().getId());
+                        },
+                        error -> {
+                            Log.e("MyAmplifyApp", "Create failed", error);
+                        }
+                );
+
+            });
 
             itemView.setOnClickListener(view -> {
                 view.setBackgroundColor(Color.parseColor("#E6E6E6"));

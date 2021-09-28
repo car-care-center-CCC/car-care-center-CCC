@@ -1,14 +1,21 @@
 package com.example.triple_c;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import androidx.collection.ArraySet;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -27,6 +34,9 @@ import com.amplifyframework.datastore.generated.model.Car;
 import com.amplifyframework.datastore.generated.model.Request;
 import com.amplifyframework.datastore.generated.model.User;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -41,8 +51,6 @@ public class Profile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
-
 
 
         TextView editText = findViewById(R.id.firstAndLastName);
@@ -79,24 +87,26 @@ public class Profile extends AppCompatActivity {
                 ModelQuery.get(User.class, userId),
                 response -> {
                     user = response.getData();
-                    Log.i("User ================ ", response.getData().getUsername());
-                    responseList=user.getRequest();
+                    responseList = user.getRequest();
+
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            String allTheFirstName= user.getFirstname();
+                            renderTheData();
+//                            renderNewImg(user.getId());
+                            String allTheFirstName = user.getFirstname();
                             String firstLetter = allTheFirstName.substring(0, 1);// get First letter of the string
-                            String remLettersString= allTheFirstName.substring(1).toLowerCase();// Get remaining letter using substring
+                            String remLettersString = allTheFirstName.substring(1).toLowerCase();// Get remaining letter using substring
 
-                            firstLetter=firstLetter.toUpperCase();
-                           String firstLetterCapitalizedName=firstLetter+remLettersString;
+                            firstLetter = firstLetter.toUpperCase();
+                            String firstLetterCapitalizedName = firstLetter + remLettersString;
 
-                           String allLastName=user.getLastname();
-                           String firstLetterLastName=allLastName.substring(0,1);
-                           String remLastName=allLastName.substring(1).toLowerCase();
+                            String allLastName = user.getLastname();
+                            String firstLetterLastName = allLastName.substring(0, 1);
+                            String remLastName = allLastName.substring(1).toLowerCase();
 
-                            firstLetterLastName=firstLetterLastName.toUpperCase();
-                            String lastName=firstLetterLastName+remLastName;
+                            firstLetterLastName = firstLetterLastName.toUpperCase();
+                            String lastName = firstLetterLastName + remLastName;
 
 //                            responseList=user.getRequest();
                             editText.setText(firstLetterCapitalizedName + " " + lastName);
@@ -108,50 +118,107 @@ public class Profile extends AppCompatActivity {
         );
 
 
+//        try {
+//            renderTheData();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+
+        Button moveToCar = findViewById(R.id.moveToCar);
+        moveToCar.setOnClickListener(view -> {
+            Intent moveToCarPage = new Intent(Profile.this, AddCar.class);
+            startActivity(moveToCarPage);
+        });
+
+        Button addPhoto = findViewById(R.id.addPhoto);
+        addPhoto.setOnClickListener(view -> {
+            Intent chooseFile = new Intent(Intent.ACTION_GET_CONTENT);
+            chooseFile.setType("*/*");
+            chooseFile = Intent.createChooser(chooseFile, "Choose a file");
+            startActivityForResult(chooseFile, 1234);
+        });
+
+    }
+
+    public void renderTheData() {
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewInProfilePage);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new OurAdapter(responseList));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        saveImgToS3(user.getId(), data.getData());
+    }
+
+    public void saveImgToS3(String imgName, Uri imgData) {
         try {
-            renderTheData();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+            InputStream exampleInputStream = getContentResolver().openInputStream(imgData);
+            Amplify.Storage.uploadInputStream(
+                    imgName,
+                    exampleInputStream,
+                    result -> {
+                        Log.i("MyAmplifyApp", "Successfully uploaded: " + result.getKey());
+                        renderNewImg(imgName);
+                    },
+                    storageFailure -> Log.e("MyAmplifyApp", "Upload failed", storageFailure)
+            );
+        } catch (FileNotFoundException error) {
+            Log.e("MyAmplifyApp", "Could not find file to open for input stream.", error);
         }
     }
 
-    public void renderTheData() throws InterruptedException {
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewInProfilePage);
-        RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-
-
-        Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
-            @Override
-            public boolean handleMessage(@NonNull Message message) {  //It will notify the recyclerview that there are a data changed
-                recyclerView.getAdapter().notifyDataSetChanged();
-                return false;
-            }
-        });
-
-        Amplify.API.query(
-                ModelQuery.list(com.amplifyframework.datastore.generated.model.Request.class),
-                response -> {
-
-                    for (Request todo : response.getData()) {
-                        Log.i("MyAmplifyApp", todo.getName());
-                            responseList.add(todo);
-                        System.out.println("++++++++++++++" + todo.getService());
-                    }
-                    handler.sendEmptyMessage(1); // send to the handler
+    public void renderNewImg(String imgName) {
+        ImageView profilePic = (ImageView) findViewById(R.id.profilePic);
+        Amplify.Storage.downloadFile(
+                imgName,
+                new File(getApplicationContext().getFilesDir() + "/" + imgName + ".jpg"),
+                result -> {
+                    Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName());
+                    Bitmap bitmap = BitmapFactory.decodeFile(result.getFile().getPath());
+                    profilePic.setImageBitmap(bitmap);
                 },
-                error -> Log.e("MyAmplifyApp", "Query failure", error)
+                error -> Log.e("MyAmplifyApp", "Download Failure", error)
         );
-
-
-//        Request request= new Request(" HI" , "Ibrahim" , "nothing" , "077445" , false, "washing", "ibrahim" , "");
-        Thread.sleep(2000);
-        System.out.println("========================================"+responseList);
-        OurAdapter adapter= new OurAdapter(responseList);
-        recyclerView.setAdapter(adapter);
     }
 
-    
+
+//    public void renderTheData() throws InterruptedException {
+//        RecyclerView recyclerView = findViewById(R.id.recyclerViewInProfilePage);
+//        RecyclerView.LayoutManager layoutManager= new LinearLayoutManager(this);
+//        recyclerView.setLayoutManager(layoutManager);
+//
+//
+//        Handler handler = new Handler(Looper.getMainLooper(), new Handler.Callback() {
+//            @Override
+//            public boolean handleMessage(@NonNull Message message) {  //It will notify the recyclerview that there are a data changed
+//                recyclerView.getAdapter().notifyDataSetChanged();
+//                return false;
+//            }
+//        });
+//
+//        Amplify.API.query(
+//                ModelQuery.list(com.amplifyframework.datastore.generated.model.Request.class),
+//                response -> {
+//
+//                    for (Request todo : response.getData()) {
+//                        Log.i("MyAmplifyApp", todo.getName());
+//                            responseList.add(todo);
+//                        System.out.println("++++++++++++++" + todo.getService());
+//                    }
+//                    handler.sendEmptyMessage(1); // send to the handler
+//                },
+//                error -> Log.e("MyAmplifyApp", "Query failure", error)
+//        );
+//
+////        Request request= new Request(" HI" , "Ibrahim" , "nothing" , "077445" , false, "washing", "ibrahim" , "");
+//        Thread.sleep(2000);
+//        System.out.println("========================================"+responseList);
+//        OurAdapter adapter= new OurAdapter(responseList);
+//        recyclerView.setAdapter(adapter);
+//    }
+
 
     private void updateData() {
 
