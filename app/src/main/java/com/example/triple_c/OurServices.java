@@ -17,6 +17,8 @@ import android.widget.TextView;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Service;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,6 +33,41 @@ public class OurServices extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_our_services);
+
+
+        //************************************************ Start BottomNavigationView ********************************************
+
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.askForServiceInMenu);
+
+        BottomNavigationItemView profileInMenu = findViewById(R.id.profileInMenu);
+        BottomNavigationItemView homeInMenu = findViewById(R.id.homeInMenu);
+        BottomNavigationItemView contactUsInMenu= findViewById(R.id.contactUsInMenu);
+        BottomNavigationItemView askForServiceInMenu = findViewById(R.id.askForServiceInMenu);
+
+        profileInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , Profile.class));
+            }
+        });
+
+        homeInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , MainActivity.class));
+            }
+        });
+
+        contactUsInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , ContactUs.class));
+        });
+
+        askForServiceInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , OurServices.class));
+        });
+
+//************************************************ End BottomNavigationView ********************************************
 
     }
 

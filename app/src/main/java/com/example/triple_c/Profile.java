@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +34,10 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Car;
 import com.amplifyframework.datastore.generated.model.Request;
+import com.amplifyframework.datastore.generated.model.Service;
 import com.amplifyframework.datastore.generated.model.User;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,6 +57,58 @@ public class Profile extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
+
+        BottomNavigationView bottomNavigationView= findViewById(R.id.bottom_navigation);
+        //Set home selected
+        bottomNavigationView.setSelectedItemId(R.id.profileInMenu);
+
+        BottomNavigationItemView profileInMenu = findViewById(R.id.profileInMenu);
+        BottomNavigationItemView homeInMenu = findViewById(R.id.homeInMenu);
+        BottomNavigationItemView contactUsInMenu= findViewById(R.id.contactUsInMenu);
+        BottomNavigationItemView askForServiceInMenu = findViewById(R.id.askForServiceInMenu);
+
+        profileInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , Profile.class));
+            }
+        });
+
+        homeInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , MainActivity.class));
+            }
+        });
+
+        contactUsInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , ContactUs.class));
+        });
+
+        askForServiceInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , OurServices.class));
+        });
+//        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+//            @Override
+//            public void onNavigationItemReselected(@NonNull MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.profileInMenu:
+//                        startActivity(new Intent(getApplicationContext() , Profile.class));
+//                        overridePendingTransition(0, 0);
+//                       return;
+//
+//                    case R.id.homeInMenu:
+//                        startActivity(new Intent(getApplicationContext() , MainActivity.class));
+//                        overridePendingTransition(0,0);
+//                        return;
+//
+//                    case R.id.contactUsInMenu:
+//                        startActivity(new Intent(getApplicationContext() , ContactUs.class));
+//
+//                }
+//
+//            }
+//        });
 
         TextView editText = findViewById(R.id.firstAndLastName);
         TextView phoneNumberText = findViewById(R.id.phoneNumberText);
