@@ -8,6 +8,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CheckedTextView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,22 +59,22 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
             });
 
             itemView.setOnClickListener(view -> {
-                view.setBackgroundColor(Color.parseColor("#E6E6E6"));
+                itemView.setBackgroundColor(Color.parseColor("#FFFFFF"));
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
                 SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
                 sharedPreferencesEditor.putString("carId", car.getId());
-                Toast.makeText(itemView.getContext(), "Car Selected Successfully!", Toast.LENGTH_LONG).show();
+                Toast.makeText(itemView.getContext(),  car.getType()+ "-" +car.getModel()+" Selected Successfully!", Toast.LENGTH_LONG).show();
                 sharedPreferencesEditor.apply();
                 itemView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        view.setBackgroundColor(Color.parseColor("#042C5A"));
                     }
                 }, 150);
             });
         }
     }
-    
+
     @NonNull
     @Override
     public CarViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

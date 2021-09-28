@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.auth.AuthUserAttributeKey;
@@ -30,28 +34,47 @@ public class SignUp extends AppCompatActivity {
         EditText lastname = findViewById(R.id.inputLastname);
         Button signup = findViewById(R.id.signupButton);
 
+        // create user to cognito
         signup.setOnClickListener(v -> {
             AuthSignUpOptions options = AuthSignUpOptions.builder()
                     .userAttribute(AuthUserAttributeKey.email(), email.getText().toString())
                     .build();
             Amplify.Auth.signUp(username.getText().toString(), password.getText().toString(), options,
                     result -> {
-                        User user = User.builder().username(username.getText().toString()).firstname(firstname.getText().toString()).lastname(lastname.getText().toString()).phone(phone.getText().toString()).email(email.getText().toString()).build();
 
+                        // save to dynamoDp
+                        User user = User.builder().username(username.getText().toString()).firstname(firstname.getText().toString()).lastname(lastname.getText().toString()).phone(phone.getText().toString()).email(email.getText().toString()).build();
                         Amplify.API.mutate(
                                 ModelMutation.create(user),
-                                response2 -> Log.i("MyAmplifyApp", "Added user with id: " + response2.getData().getId()),
+                                response2 -> {
+                                    Log.i("MyAmplifyApp", "Added user with id: " + response2.getData().getId());
+                                    Intent goConfirm = new Intent(SignUp.this, Confirm.class);
+                                    startActivity(goConfirm);
+                                },
                                 error -> Log.e("MyAmplifyApp", "Create failed", error)
                         );
-
                         Log.i("AuthQuickStart", "Result: " + result.toString());
                     },
-                    error -> Log.e("AuthQuickStart", "Sign up failed", error)
+                    error -> {
+                        handler1();
+                        Log.e("AuthQuickStart", "Sign up failed", error);
+                    }
             );
-
-            Intent goConfirm = new Intent(SignUp.this, Confirm.class);
-            startActivity(goConfirm);
         });
 
+        TextView goSignIn = findViewById(R.id.goSignIn);
+        goSignIn.setOnClickListener(view -> {
+            Intent goToSignIn = new Intent(SignUp.this, SignIn.class);
+            startActivity(goToSignIn);
+        });
+    }
+
+    public void handler1() {
+        new Handler(Looper.getMainLooper()).post(new Runnable() {
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(), "Username already exist!", Toast.LENGTH_LONG).show();
+            }
+        });
     }
 }

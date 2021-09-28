@@ -1,5 +1,6 @@
 package com.example.triple_c;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,6 +23,8 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.User;
 
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,6 +32,42 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+//************************************************ Start BottomNavigationView ********************************************
+
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.homeInMenu);
+
+        BottomNavigationItemView profileInMenu = findViewById(R.id.profileInMenu);
+        BottomNavigationItemView homeInMenu = findViewById(R.id.homeInMenu);
+        BottomNavigationItemView contactUsInMenu= findViewById(R.id.contactUsInMenu);
+        BottomNavigationItemView askForServiceInMenu = findViewById(R.id.askForServiceInMenu);
+
+        profileInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , Profile.class));
+            }
+        });
+
+        homeInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , MainActivity.class));
+            }
+        });
+
+        contactUsInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , ContactUs.class));
+        });
+
+        askForServiceInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , OurServices.class));
+        });
+
+//************************************************ End BottomNavigationView ********************************************
+
 
         AuthUser authUser = Amplify.Auth.getCurrentUser();
         String username = authUser.getUsername();
@@ -47,18 +87,6 @@ public class MainActivity extends AppCompatActivity {
                 error -> Log.e("MyAmplifyApp", error.toString(), error)
         );
 
-        Button signoutButton = findViewById(R.id.signoutButton);
-        signoutButton.setOnClickListener(v -> {
-            Amplify.Auth.signOut(
-                    () -> {
-                        Log.i("AuthQuickstart", "Signed out successfully");
-                        Intent goToSignIn = new Intent(MainActivity.this, SignIn.class);
-                        startActivity(goToSignIn);
-                        finish();
-                    },
-                    error -> Log.e("AuthQuickstart", error.toString())
-            );
-        });
 
 
         RelativeLayout serviscesMain = findViewById(R.id.servicesmain);
@@ -88,6 +116,9 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(goToContactUsMains);
             }
         });
+
+
+
 
     }
 }

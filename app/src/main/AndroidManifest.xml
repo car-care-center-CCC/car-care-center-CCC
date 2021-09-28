@@ -21,7 +21,8 @@
 
         <activity
             android:name=".AddCar"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Splash"
             android:exported="true"
@@ -42,7 +43,8 @@
             android:exported="true" />
         <activity
             android:name=".AskForService"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".Profile"
             android:exported="true" />
@@ -56,7 +58,8 @@
             android:parentActivityName=".SignIn" />
         <activity
             android:name=".SignIn"
-            android:exported="true" />
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"></activity>

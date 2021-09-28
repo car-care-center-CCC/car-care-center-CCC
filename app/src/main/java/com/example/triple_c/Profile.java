@@ -14,6 +14,8 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -32,7 +34,10 @@ import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.Car;
 import com.amplifyframework.datastore.generated.model.Request;
+import com.amplifyframework.datastore.generated.model.Service;
 import com.amplifyframework.datastore.generated.model.User;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -53,7 +58,61 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
 
+        BottomNavigationView bottomNavigationView= findViewById(R.id.bottom_navigation);
+        //Set home selected
+        bottomNavigationView.setSelectedItemId(R.id.profileInMenu);
+
+        BottomNavigationItemView profileInMenu = findViewById(R.id.profileInMenu);
+        BottomNavigationItemView homeInMenu = findViewById(R.id.homeInMenu);
+        BottomNavigationItemView contactUsInMenu= findViewById(R.id.contactUsInMenu);
+        BottomNavigationItemView askForServiceInMenu = findViewById(R.id.askForServiceInMenu);
+
+        profileInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , Profile.class));
+            }
+        });
+
+        homeInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , MainActivity.class));
+            }
+        });
+
+        contactUsInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , ContactUs.class));
+        });
+
+        askForServiceInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , OurServices.class));
+        });
+//        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+//            @Override
+//            public void onNavigationItemReselected(@NonNull MenuItem item) {
+//                switch (item.getItemId()){
+//                    case R.id.profileInMenu:
+//                        startActivity(new Intent(getApplicationContext() , Profile.class));
+//                        overridePendingTransition(0, 0);
+//                       return;
+//
+//                    case R.id.homeInMenu:
+//                        startActivity(new Intent(getApplicationContext() , MainActivity.class));
+//                        overridePendingTransition(0,0);
+//                        return;
+//
+//                    case R.id.contactUsInMenu:
+//                        startActivity(new Intent(getApplicationContext() , ContactUs.class));
+//
+//                }
+//
+//            }
+//        });
+
         TextView editText = findViewById(R.id.firstAndLastName);
+        TextView phoneNumberText = findViewById(R.id.phoneNumberText);
+        TextView emailText = findViewById(R.id.emailText);
 
 //        Amplify.API.query(
 //                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
@@ -110,6 +169,9 @@ public class Profile extends AppCompatActivity {
 
 //                            responseList=user.getRequest();
                             editText.setText(firstLetterCapitalizedName + " " + lastName);
+
+                            phoneNumberText.setText(user.getPhone());
+                            emailText.setText(user.getEmail());
                         }
                     });
 
@@ -124,10 +186,16 @@ public class Profile extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
-        Button moveToCar = findViewById(R.id.moveToCar);
+        TextView moveToCar = findViewById(R.id.moveToCar);
         moveToCar.setOnClickListener(view -> {
             Intent moveToCarPage = new Intent(Profile.this, AddCar.class);
             startActivity(moveToCarPage);
+        });
+
+        TextView moveToServicePage = findViewById(R.id.moveToServicePage);
+        moveToServicePage.setOnClickListener(view -> {
+            Intent moveToService = new Intent(Profile.this, OurServices.class);
+            startActivity(moveToService);
         });
 
         Button addPhoto = findViewById(R.id.addPhoto);
@@ -136,6 +204,19 @@ public class Profile extends AppCompatActivity {
             chooseFile.setType("*/*");
             chooseFile = Intent.createChooser(chooseFile, "Choose a file");
             startActivityForResult(chooseFile, 1234);
+        });
+
+        TextView signOutFromProfile = findViewById(R.id.signOutProfile);
+        signOutFromProfile.setOnClickListener(v -> {
+            Amplify.Auth.signOut(
+                    () -> {
+                        Log.i("AuthQuickstart", "Signed out successfully");
+                        Intent goToSignIn = new Intent(Profile.this, SignIn.class);
+                        startActivity(goToSignIn);
+                        finish();
+                    },
+                    error -> Log.e("AuthQuickstart", error.toString())
+            );
         });
 
     }
