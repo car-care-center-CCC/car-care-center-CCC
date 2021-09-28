@@ -10,4 +10,10 @@
     <color name="DarkGray">#212529</color>
     <color name="BabyBlue">#5093E2</color>
     <color name="Pink">#A43F49</color>
+    <color name="Mystic">#e2eaed</color>
+    <color name="Green_Vogue">#042C5A</color>
+    <color name="yellow">#FFC107</color>
+    <color name="grey">#808080</color>
+    <color name="Shuttle_Gray">#586065</color>
+
 </resources>
