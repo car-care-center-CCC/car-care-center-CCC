@@ -81,42 +81,42 @@ public class OurServices extends AppCompatActivity {
         CardView card1 = findViewById(R.id.card1);
         card1.setOnClickListener(view -> {
             Intent goToAskForService = new Intent(OurServices.this, AskForService.class);
-            goToAskForService.putExtra("serviceId", "6a010c27-6b37-4093-9e64-4c87bdbea800");
+            goToAskForService.putExtra("serviceId", "20aae290-be18-47bc-b6b8-a16909bf3898");
             startActivity(goToAskForService);
         });
 
         CardView card2 = findViewById(R.id.card2);
         card2.setOnClickListener(view -> {
             Intent goToAskForService = new Intent(OurServices.this, AskForService.class);
-            goToAskForService.putExtra("serviceId", "1f111de1-cbba-44ab-bb13-28aa25fd6be9");
+            goToAskForService.putExtra("serviceId", "f8a2d3f3-2e01-48d3-992e-614cca5cdea4");
             startActivity(goToAskForService);
         });
 
         CardView card3 = findViewById(R.id.card3);
         card3.setOnClickListener(view -> {
             Intent goToAskForService = new Intent(OurServices.this, AskForService.class);
-            goToAskForService.putExtra("serviceId", "20aae290-be18-47bc-b6b8-a16909bf3898");
+            goToAskForService.putExtra("serviceId", "5ccb2369-fd80-451d-96b0-7bfe6da99d76");
             startActivity(goToAskForService);
         });
 
         CardView card4 = findViewById(R.id.card4);
         card4.setOnClickListener(view -> {
             Intent goToAskForService = new Intent(OurServices.this, AskForService.class);
-            goToAskForService.putExtra("serviceId", "5ccb2369-fd80-451d-96b0-7bfe6da99d76");
+            goToAskForService.putExtra("serviceId", "6a010c27-6b37-4093-9e64-4c87bdbea800");
             startActivity(goToAskForService);
         });
 
         CardView card5 = findViewById(R.id.card5);
         card5.setOnClickListener(view -> {
             Intent goToAskForService = new Intent(OurServices.this, AskForService.class);
-            goToAskForService.putExtra("serviceId", "5adf8736-04a6-4978-86d8-4186a6a3ae8a");
+            goToAskForService.putExtra("serviceId", "1f111de1-cbba-44ab-bb13-28aa25fd6be9");
             startActivity(goToAskForService);
         });
 
         CardView card6 = findViewById(R.id.card6);
         card6.setOnClickListener(view -> {
             Intent goToAskForService = new Intent(OurServices.this, AskForService.class);
-            goToAskForService.putExtra("serviceId", "f8a2d3f3-2e01-48d3-992e-614cca5cdea4");
+            goToAskForService.putExtra("serviceId", "5adf8736-04a6-4978-86d8-4186a6a3ae8a");
             startActivity(goToAskForService);
         });
 
