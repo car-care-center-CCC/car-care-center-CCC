@@ -58,35 +58,35 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
 
-        BottomNavigationView bottomNavigationView= findViewById(R.id.bottom_navigation);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         //Set home selected
         bottomNavigationView.setSelectedItemId(R.id.profileInMenu);
 
         BottomNavigationItemView profileInMenu = findViewById(R.id.profileInMenu);
         BottomNavigationItemView homeInMenu = findViewById(R.id.homeInMenu);
-        BottomNavigationItemView contactUsInMenu= findViewById(R.id.contactUsInMenu);
+        BottomNavigationItemView contactUsInMenu = findViewById(R.id.contactUsInMenu);
         BottomNavigationItemView askForServiceInMenu = findViewById(R.id.askForServiceInMenu);
 
         profileInMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext() , Profile.class));
+                startActivity(new Intent(getApplicationContext(), Profile.class));
             }
         });
 
         homeInMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext() , MainActivity.class));
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
 
-        contactUsInMenu.setOnClickListener((v)->{
-            startActivity(new Intent(getApplicationContext() , ContactUs.class));
+        contactUsInMenu.setOnClickListener((v) -> {
+            startActivity(new Intent(getApplicationContext(), ContactUs.class));
         });
 
-        askForServiceInMenu.setOnClickListener((v)->{
-            startActivity(new Intent(getApplicationContext() , OurServices.class));
+        askForServiceInMenu.setOnClickListener((v) -> {
+            startActivity(new Intent(getApplicationContext(), OurServices.class));
         });
 //        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
 //            @Override
@@ -218,7 +218,6 @@ public class Profile extends AppCompatActivity {
                     error -> Log.e("AuthQuickstart", error.toString())
             );
         });
-
     }
 
     public void renderTheData() {
@@ -231,6 +230,7 @@ public class Profile extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         saveImgToS3(user.getId(), data.getData());
+        updateImgData(user.getId());
     }
 
     public void saveImgToS3(String imgName, Uri imgData) {
@@ -251,19 +251,38 @@ public class Profile extends AppCompatActivity {
     }
 
     public void renderNewImg(String imgName) {
-        ImageView profilePic = (ImageView) findViewById(R.id.profilePic);
-        Amplify.Storage.downloadFile(
-                imgName,
-                new File(getApplicationContext().getFilesDir() + "/" + imgName + ".jpg"),
-                result -> {
-                    Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName());
-                    Bitmap bitmap = BitmapFactory.decodeFile(result.getFile().getPath());
-                    profilePic.setImageBitmap(bitmap);
-                },
-                error -> Log.e("MyAmplifyApp", "Download Failure", error)
-        );
+        if (user.getImage()!=null){
+            ImageView profilePic = (ImageView) findViewById(R.id.profilePic);
+            Amplify.Storage.downloadFile(
+                    imgName,
+                    new File(getApplicationContext().getFilesDir() + "/" + imgName + ".jpg"),
+                    result -> {
+                        Log.i("MyAmplifyApp", "Successfully downloaded: " + result.getFile().getName());
+                        Bitmap bitmap = BitmapFactory.decodeFile(result.getFile().getPath());
+                        profilePic.setImageBitmap(bitmap);
+                    },
+                    error -> Log.e("MyAmplifyApp", "Download Failure", error)
+            );
+        }
     }
 
+    private void updateImgData(String imgName) {
+        Amplify.API.query(
+                ModelQuery.get(User.class, user.getId()),
+                response -> {
+                    Log.i("MyAmplifyApp", "UpdateQuery");
+                    User userUpdate = response.getData().copyOfBuilder()
+                            .image(imgName)
+                            .build();
+                    Amplify.API.mutate(ModelMutation.update(userUpdate),
+                            response3 ->  Log.i("MyAmplifyApp", "Updated Todo with id: " + response3.getData().getFirstname()),
+                            error -> Log.e("MyAmplifyApp", "Update failed", error)
+                    );
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+
+    }
 
 //    public void renderTheData() throws InterruptedException {
 //        RecyclerView recyclerView = findViewById(R.id.recyclerViewInProfilePage);
@@ -301,56 +320,56 @@ public class Profile extends AppCompatActivity {
 //    }
 
 
-    private void updateData() {
-
-        Amplify.API.query(
-                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
-                response -> {
-                    boolean isThere = false;
-                    for (User user : response.getData()) {
-                        Log.i("MyAmplifyApp", user.getId());
-                        if (user != null) {
-                            if (user.getUsername().equals("Ibrahim")) {
-
-                                if (true) {
-                                    Log.i("MyAmplifyApp", "UpdateQuery");
-
-                                    User userUpdate = user.copyOfBuilder()
-                                            .firstname("Hello")
-                                            .lastname("Hello")
-                                            .phone("0772448924")
-                                            .username("Ibrahim")
-                                            .email("ibrahimalhamshari742@gmail.com")
-                                            .image("Hello")
-                                            .id(user.getId())
-                                            .build();
-
-                                    Amplify.API.mutate(ModelMutation.update(userUpdate),
-                                            response3 -> {
-                                                Log.i("MyAmplifyApp", "Updated Todo with id: " + response3.getData().getFirstname());
-                                                System.out.println("+++++++++++++++++++++++++++++++" + user.getId());
-                                                System.out.println();
-                                            },
-                                            error -> Log.e("MyAmplifyApp", "Update failed", error)
-                                    );
-                                } else {
-                                    Log.e("MyAmplifyApp", "Insert Query");
-                                    Amplify.API.mutate(ModelMutation.create(user),
-                                            response2 -> Log.i("MyAmplifyApp", "Added Todo with id: " + response2.getData().getId()),
-                                            error -> Log.e("MyAmplifyApp", "Create failed", error)
-                                    );
-                                }
-
-
-                                System.out.println("==========================" + user.getEmail());
-                                System.out.println("==========================" + user.getId());
-                                break;
-                            }
-                        }
-                    }
-                },
-                error -> Log.e("MyAmplifyApp", "Query failure", error)
-        );
-
-    }
+//    private void updateData() {
+//
+//        Amplify.API.query(
+//                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
+//                response -> {
+//                    boolean isThere = false;
+//                    for (User user : response.getData()) {
+//                        Log.i("MyAmplifyApp", user.getId());
+//                        if (user != null) {
+//                            if (user.getUsername().equals("Ibrahim")) {
+//
+//                                if (true) {
+//                                    Log.i("MyAmplifyApp", "UpdateQuery");
+//
+//                                    User userUpdate = user.copyOfBuilder()
+//                                            .firstname("Hello")
+//                                            .lastname("Hello")
+//                                            .phone("0772448924")
+//                                            .username("Ibrahim")
+//                                            .email("ibrahimalhamshari742@gmail.com")
+//                                            .image(null)
+//                                            .id(user.getId())
+//                                            .build();
+//
+//                                    Amplify.API.mutate(ModelMutation.update(userUpdate),
+//                                            response3 -> {
+//                                                Log.i("MyAmplifyApp", "Updated Todo with id: " + response3.getData().getFirstname());
+//                                                System.out.println("+++++++++++++++++++++++++++++++" + user.getId());
+//                                                System.out.println();
+//                                            },
+//                                            error -> Log.e("MyAmplifyApp", "Update failed", error)
+//                                    );
+//                                } else {
+//                                    Log.e("MyAmplifyApp", "Insert Query");
+//                                    Amplify.API.mutate(ModelMutation.create(user),
+//                                            response2 -> Log.i("MyAmplifyApp", "Added Todo with id: " + response2.getData().getId()),
+//                                            error -> Log.e("MyAmplifyApp", "Create failed", error)
+//                                    );
+//                                }
+//
+//
+//                                System.out.println("==========================" + user.getEmail());
+//                                System.out.println("==========================" + user.getId());
+//                                break;
+//                            }
+//                        }
+//                    }
+//                },
+//                error -> Log.e("MyAmplifyApp", "Query failure", error)
+//        );
+//
+//    }
 }

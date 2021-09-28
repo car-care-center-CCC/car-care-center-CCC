@@ -10,21 +10,25 @@ import android.view.ViewGroup;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link fragment_requests_in_profile#newInstance} factory method to
+ * Use the {@link PendingRequestFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class fragment_requests_in_profile extends Fragment {
+public class PendingRequestFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "name";
     private static final String ARG_PARAM2 = "description";
+    private static final String ARG_PARAM3 = "phone";
+    private static final String ARG_PARAM4 = "ourLocation";
 
     // TODO: Rename and change types of parameters
     private String mName;
     private String mDescription;
+    private String mPhone;
+    private String mOurLocation;
 
-    public fragment_requests_in_profile() {
+    public PendingRequestFragment() {
         // Required empty public constructor
     }
 
@@ -34,14 +38,18 @@ public class fragment_requests_in_profile extends Fragment {
      *
      * @param mName Parameter 1.
      * @param mDescription Parameter 2.
-     * @return A new instance of fragment fragment_requests_in_profile.
+     * @param mPhone Parameter 3.
+     * @param mOurLocation Parameter 4.
+     * @return A new instance of fragment PendingRequestFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static fragment_requests_in_profile newInstance(String mName, String mDescription) {
-        fragment_requests_in_profile fragment = new fragment_requests_in_profile();
+    public static PendingRequestFragment newInstance(String mName, String mDescription, String mPhone, String mOurLocation) {
+        PendingRequestFragment fragment = new PendingRequestFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, mName);
         args.putString(ARG_PARAM2, mDescription);
+        args.putString(ARG_PARAM3, mPhone);
+        args.putString(ARG_PARAM4, mOurLocation);
         fragment.setArguments(args);
         return fragment;
     }
@@ -52,6 +60,8 @@ public class fragment_requests_in_profile extends Fragment {
         if (getArguments() != null) {
             mName = getArguments().getString(ARG_PARAM1);
             mDescription = getArguments().getString(ARG_PARAM2);
+            mPhone = getArguments().getString(ARG_PARAM2);
+            mOurLocation = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -59,6 +69,6 @@ public class fragment_requests_in_profile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_requests_in_profile, container, false);
+        return inflater.inflate(R.layout.fragment_pending_request, container, false);
     }
 }

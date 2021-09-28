@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -34,10 +35,15 @@ public class Details extends AppCompatActivity implements OnMapReadyCallback {
         cityName = intent.getExtras().getString("cityName");
         countryName = intent.getExtras().getString("countryName");
 
-        // render fields
-        TextView userNameView = findViewById(R.id.usernameView);
-        userNameView.setText(intent.getExtras().getString("username"));
+        TextView pendingView = findViewById(R.id.pendingView);
+        Boolean taken = intent.getExtras().getBoolean("taken");
+        if (taken){
+            pendingView.setText("Approved");
+            pendingView.setBackgroundColor(Color.parseColor("#6ECB63"));
+        }
 
+
+        // render fields
         TextView requestNameView = findViewById(R.id.requestNameView);
         requestNameView.setText("Request Name: " + intent.getExtras().getString("requestName"));
 
