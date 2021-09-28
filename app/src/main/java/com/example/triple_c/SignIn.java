@@ -39,13 +39,10 @@ public class SignIn extends AppCompatActivity {
                         finish();
                     } else {
                         handler2();
-                        System.out.println("=================================" + result.isSignInComplete());
                     }
                 },
-
                 error -> {
                     Log.e("AuthQuickstart", error.toString());
-                    System.out.println("========================" + error.toString());
                     handler2();
                 }
         ));

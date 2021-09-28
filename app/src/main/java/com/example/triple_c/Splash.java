@@ -64,11 +64,9 @@ public class Splash extends AppCompatActivity {
                 if (authUser != null) {
                     Intent goToMain = new Intent(Splash.this, MainActivity.class);
                     startActivity(goToMain);
-                    finish();
                 } else {
                     Intent goToSignIn = new Intent(Splash.this, SignIn.class);
                     startActivity(goToSignIn);
-                    finish();
                 }
             }
         }, splashScreen);

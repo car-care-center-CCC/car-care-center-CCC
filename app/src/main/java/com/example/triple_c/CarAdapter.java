@@ -56,7 +56,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
             });
 
             itemView.setOnClickListener(view -> {
-                view.setBackgroundColor(Color.parseColor("#E6E6E6"));
+                view.setBackgroundColor(Color.parseColor("#E2EAED"));
                 SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(view.getContext());
                 SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
                 sharedPreferencesEditor.putString("carId", car.getId());
@@ -65,7 +65,7 @@ public class CarAdapter extends RecyclerView.Adapter<CarAdapter.CarViewHolder> {
                 itemView.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        view.setBackgroundColor(Color.parseColor("#FFFFFF"));
+                        view.setBackgroundColor(Color.parseColor("#042C5A"));
                     }
                 }, 150);
             });
