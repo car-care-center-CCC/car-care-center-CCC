@@ -35,6 +35,8 @@ import com.amplifyframework.datastore.generated.model.User;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import java.io.IOException;
@@ -62,6 +64,7 @@ public class AskForService extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ask_for_service);
+
 
         serviceName = findViewById(R.id.serviceName);
         serviceDescription = findViewById(R.id.serviceDescription);

@@ -17,6 +17,8 @@ import android.view.textclassifier.TextLinks;
 import android.widget.TextView;
 
 import com.amplifyframework.datastore.generated.model.Request;
+import com.google.android.material.bottomnavigation.BottomNavigationItemView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -28,6 +30,39 @@ public class ContactUs extends AppCompatActivity {
         setContentView(R.layout.activity_contact_us);
 
 
+        //************************************************ Start BottomNavigationView ********************************************
+        BottomNavigationView bottomNavigationView= findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setSelectedItemId(R.id.contactUsInMenu);
+
+
+        BottomNavigationItemView profileInMenu = findViewById(R.id.profileInMenu);
+        BottomNavigationItemView homeInMenu = findViewById(R.id.homeInMenu);
+        BottomNavigationItemView contactUsInMenu= findViewById(R.id.contactUsInMenu);
+        BottomNavigationItemView askForServiceInMenu = findViewById(R.id.askForServiceInMenu);
+
+        profileInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , Profile.class));
+            }
+        });
+
+        homeInMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext() , MainActivity.class));
+            }
+        });
+
+        contactUsInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , ContactUs.class));
+        });
+
+        askForServiceInMenu.setOnClickListener((v)->{
+            startActivity(new Intent(getApplicationContext() , OurServices.class));
+        });
+
+//************************************************ End BottomNavigationView ********************************************
     }
 
 
