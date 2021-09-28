@@ -54,6 +54,8 @@ public class Profile extends AppCompatActivity {
 
 
         TextView editText = findViewById(R.id.firstAndLastName);
+        TextView phoneNumberText = findViewById(R.id.phoneNumberText);
+        TextView emailText = findViewById(R.id.emailText);
 
 //        Amplify.API.query(
 //                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
@@ -110,6 +112,9 @@ public class Profile extends AppCompatActivity {
 
 //                            responseList=user.getRequest();
                             editText.setText(firstLetterCapitalizedName + " " + lastName);
+
+                            phoneNumberText.setText(user.getPhone());
+                            emailText.setText(user.getEmail());
                         }
                     });
 
@@ -124,10 +129,16 @@ public class Profile extends AppCompatActivity {
 //            e.printStackTrace();
 //        }
 
-        Button moveToCar = findViewById(R.id.moveToCar);
+        TextView moveToCar = findViewById(R.id.moveToCar);
         moveToCar.setOnClickListener(view -> {
             Intent moveToCarPage = new Intent(Profile.this, AddCar.class);
             startActivity(moveToCarPage);
+        });
+
+        TextView moveToServicePage = findViewById(R.id.moveToServicePage);
+        moveToServicePage.setOnClickListener(view -> {
+            Intent moveToService = new Intent(Profile.this, OurServices.class);
+            startActivity(moveToService);
         });
 
         Button addPhoto = findViewById(R.id.addPhoto);

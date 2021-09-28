@@ -155,10 +155,11 @@ public final class Car implements Model {
       gasoline,
       user);
   }
-  public interface TypeStep {
+
+    public interface TypeStep {
     BuildStep type(String type);
   }
-  
+
 
   public interface BuildStep {
     Car build();
