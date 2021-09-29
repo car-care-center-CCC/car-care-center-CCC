@@ -114,31 +114,6 @@ public class Profile extends AppCompatActivity {
         TextView phoneNumberText = findViewById(R.id.phoneNumberText);
         TextView emailText = findViewById(R.id.emailText);
 
-//        Amplify.API.query(
-//                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
-//                response -> {
-//
-//                    for (User todo : response.getData()) {
-//                        Log.i("MyAmplifyApp", todo.getFirstname());
-//                        if (todo.getFirstname().equals("ibrahim")) {
-////                            responseList.add(todo);
-//
-//                            runOnUiThread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    editText.setText(todo.getFirstname() + " " + todo.getLastname());
-//                                }
-//                            });
-//                            System.out.println("============" + todo.getFirstname());
-//                            System.out.println("============" + todo.getCreatedAt());
-//                        }
-//
-//                    }
-////                    handler.sendEmptyMessage(1); // send to the handler
-//                },
-//                error -> Log.e("MyAmplifyApp", "Query failure", error)
-//        );
-
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(Profile.this);
         String userId = sharedPreferences.getString("userId", "");
 
@@ -152,7 +127,7 @@ public class Profile extends AppCompatActivity {
                         @Override
                         public void run() {
                             renderTheData();
-//                            renderNewImg(user.getId());
+                            renderNewImg(user.getId());
                             String allTheFirstName = user.getFirstname();
                             String firstLetter = allTheFirstName.substring(0, 1);// get First letter of the string
                             String remLettersString = allTheFirstName.substring(1).toLowerCase();// Get remaining letter using substring

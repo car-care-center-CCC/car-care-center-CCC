@@ -57,10 +57,11 @@
         <EditText
             android:id="@+id/editTextCarModel"
             android:layout_width="125dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/carModelTextView" />
 
@@ -70,6 +71,7 @@
             android:layout_height="wrap_content"
             android:text="Car type"
             android:textColor="#042C5A"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -111,6 +113,7 @@
             android:layout_marginTop="45dp"
             android:text="Car Model"
             android:textColor="#042C5A"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextCarType" />
 
@@ -127,10 +130,11 @@
         <EditText
             android:id="@+id/editTextCarType"
             android:layout_width="125dp"
-            android:layout_height="42dp"
-            android:layout_marginTop="5dp"
+            android:layout_height="50dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:inputType="textPersonName"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/carTypeTextView" />
 
@@ -138,7 +142,7 @@
             android:id="@+id/buttonGoProfile"
             android:layout_width="110dp"
             android:layout_height="50dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="104dp"
             android:background="@drawable/void_button_pg"
             android:text="Profile"
             android:textColor="#042C5A"
