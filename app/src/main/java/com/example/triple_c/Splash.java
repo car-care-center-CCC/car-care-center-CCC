@@ -62,8 +62,13 @@ public class Splash extends AppCompatActivity {
 
                 AuthUser authUser = Amplify.Auth.getCurrentUser();
                 if (authUser != null) {
-                    Intent goToMain = new Intent(Splash.this, MainActivity.class);
-                    startActivity(goToMain);
+                    if (authUser.getUsername().equals("admin2")){
+                        Intent goToDashBoard = new Intent(Splash.this, Dashboard.class);
+                        startActivity(goToDashBoard);
+                    } else {
+                        Intent goToMain = new Intent(Splash.this, MainActivity.class);
+                        startActivity(goToMain);
+                    }
                 } else {
                     Intent goToSignIn = new Intent(Splash.this, SignIn.class);
                     startActivity(goToSignIn);

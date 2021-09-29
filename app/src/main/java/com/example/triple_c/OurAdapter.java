@@ -56,6 +56,7 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
             itemView.setOnClickListener(view -> {
                 Intent goToDetails = new Intent(itemView.getContext(), Details.class);
                 goToDetails.putExtra("requestName", request.getName());
+                goToDetails.putExtra("taken", request.getIsTaken());
                 goToDetails.putExtra("requestDescription", request.getDescription());
                 goToDetails.putExtra("phone", request.getPhone());
                 goToDetails.putExtra("username", request.getUser().getUsername());
@@ -83,10 +84,10 @@ public class OurAdapter extends RecyclerView.Adapter<OurAdapter.RequestViewHolde
     public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
     holder.request = allRequests.get(position);
         TextView requestName=holder.itemView.findViewById(R.id.requestNameInFragment);
-        TextView car=holder.itemView.findViewById(R.id.carInFragment);
+        TextView description=holder.itemView.findViewById(R.id.descriptionInFragment);
 
         requestName.setText(holder.request.getName());
-        car.setText(holder.request.getCar().getType().toString());
+        description.setText(holder.request.getDescription());
     }
 
     @Override
