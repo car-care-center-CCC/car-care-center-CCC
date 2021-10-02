@@ -1,4 +1,4 @@
-# **car-care-center-CCC**
+# **Triple-c**
 
 ## **Team members**
 1. **Mohammad AbuFarweh**
@@ -71,3 +71,29 @@ Till this moment we use Slack, Zoom, and Discord.
 - What is your Git flow?
 
   Done by creating a sub-branch to bush all work on it. not in the main. Also, every member will work in a separate repository and push theork to the group repository after we make sure it's completely right.
+
+## Images for the application
+
+<br>
+
+![Splash Page](asserts/Splash.jpg)
+
+![SignIn](asserts/Sign_In.jpg)
+
+![SignUp](asserts/Sign_Up.jpg)
+
+![Admin's Dashboard](asserts/Admin's_dashboard.jpg)
+
+![Main](asserts/Main.jpg)
+
+![Profile](asserts/Profile.jpg)
+
+![Our-services](asserts/Our_services.jpg)
+
+![Ask-for-service](asserts/Ask_for_service.jpg)
+
+![Add-car](asserts/Add_car.jpg)
+
+![Contact-us](asserts/Contact_us.jpg)
+
+![Details](asserts/Details.jpg)

@@ -131,7 +131,7 @@
             android:layout_marginRight="15dp"
             android:layout_marginBottom="136dp"
             android:background="@drawable/input_pg"
-            android:drawableLeft="@drawable/ic_secure"
+            android:drawableLeft="@drawable/ic_baseline_lock_24"
             android:drawablePadding="5dp"
             android:ems="10"
             android:hint="Password"
