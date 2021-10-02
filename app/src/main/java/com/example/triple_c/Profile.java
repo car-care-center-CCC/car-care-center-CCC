@@ -58,6 +58,8 @@ public class Profile extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
 
 
+//        updateData();
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
         //Set home selected
         bottomNavigationView.setSelectedItemId(R.id.profileInMenu);
@@ -295,56 +297,54 @@ public class Profile extends AppCompatActivity {
 //    }
 
 
-//    private void updateData() {
-//
-//        Amplify.API.query(
-//                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
-//                response -> {
-//                    boolean isThere = false;
-//                    for (User user : response.getData()) {
-//                        Log.i("MyAmplifyApp", user.getId());
-//                        if (user != null) {
-//                            if (user.getUsername().equals("Ibrahim")) {
-//
-//                                if (true) {
-//                                    Log.i("MyAmplifyApp", "UpdateQuery");
-//
-//                                    User userUpdate = user.copyOfBuilder()
-//                                            .firstname("Hello")
-//                                            .lastname("Hello")
-//                                            .phone("0772448924")
-//                                            .username("Ibrahim")
-//                                            .email("ibrahimalhamshari742@gmail.com")
-//                                            .image(null)
-//                                            .id(user.getId())
-//                                            .build();
-//
-//                                    Amplify.API.mutate(ModelMutation.update(userUpdate),
-//                                            response3 -> {
-//                                                Log.i("MyAmplifyApp", "Updated Todo with id: " + response3.getData().getFirstname());
-//                                                System.out.println("+++++++++++++++++++++++++++++++" + user.getId());
-//                                                System.out.println();
-//                                            },
-//                                            error -> Log.e("MyAmplifyApp", "Update failed", error)
-//                                    );
-//                                } else {
-//                                    Log.e("MyAmplifyApp", "Insert Query");
-//                                    Amplify.API.mutate(ModelMutation.create(user),
-//                                            response2 -> Log.i("MyAmplifyApp", "Added Todo with id: " + response2.getData().getId()),
-//                                            error -> Log.e("MyAmplifyApp", "Create failed", error)
-//                                    );
-//                                }
-//
-//
-//                                System.out.println("==========================" + user.getEmail());
-//                                System.out.println("==========================" + user.getId());
-//                                break;
-//                            }
-//                        }
-//                    }
-//                },
-//                error -> Log.e("MyAmplifyApp", "Query failure", error)
-//        );
-//
-//    }
+    private void updateData() {
+
+        Amplify.API.query(
+                ModelQuery.list(com.amplifyframework.datastore.generated.model.User.class),
+                response -> {
+                    for (User user : response.getData()) {
+                        Log.i("MyAmplifyApp", user.getId());
+                        if (user != null) {
+                            if (user.getUsername().equals("Ibrahim")) {
+
+                                if (true) {
+                                    Log.i("MyAmplifyApp", "UpdateQuery");
+
+                                    User userUpdate = user.copyOfBuilder()
+                                            .firstname("Ibrahim")
+                                            .lastname("Alhamshari")
+                                            .phone("0772448924")
+                                            .username("Ibrahim")
+                                            .id(user.getId())
+                                            .build();
+
+                                    Amplify.API.mutate(ModelMutation.update(userUpdate),
+                                            response3 -> {
+                                                Log.i("MyAmplifyApp", "Updated Todo with id: " + response3.getData().getFirstname());
+                                                System.out.println("+++++++++++++++++++++++++++++++" + user.getId());
+                                                System.out.println("+++++++++++++++++++++++++++++++" + user.getFirstname());
+                                                System.out.println();
+                                            },
+                                            error -> Log.e("MyAmplifyApp", "Update failed", error)
+                                    );
+                                } else {
+                                    Log.e("MyAmplifyApp", "Insert Query");
+                                    Amplify.API.mutate(ModelMutation.create(user),
+                                            response2 -> Log.i("MyAmplifyApp", "Added Todo with id: " + response2.getData().getId()),
+                                            error -> Log.e("MyAmplifyApp", "Create failed", error)
+                                    );
+                                }
+
+
+                                System.out.println("==========================" + user.getEmail());
+                                System.out.println("==========================" + user.getId());
+                                break;
+                            }
+                        }
+                    }
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+
+    }
 }
